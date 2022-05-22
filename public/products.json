@@ -1,0 +1,82 @@
+[
+  {
+    "name": "Arduino Uno R3",
+    "price": 1045,
+    "image": "https://i.ibb.co/mbpzdBX/arduino-uno.jpg",
+    "stock": 300,
+    "moq": 50,
+    "review": 5
+  },
+  {
+    "name": "ESP32-CAM WiFi + Bluetooth Camera",
+    "price": 1250,
+    "image": "https://i.ibb.co/c1DvhQ4/esp32-cam-wifi-bluetooth-camera.jpg",
+    "stock": 400,
+    "moq": 25,
+    "review": 4
+  },
+  {
+    "name": "Graphic LCD 128x64",
+    "price": 2300,
+    "image": "https://i.ibb.co/C2m3G8B/graphic-lcd.jpg",
+    "stock": 150,
+    "moq": 10,
+    "review": 5
+  },
+  {
+    "name": "Methane Natural Gas Sensor",
+    "price": 155,
+    "image": "https://i.ibb.co/6g495w9/gas-sensor.jpg",
+    "stock": 250,
+    "moq": 100,
+    "review": 5
+  },
+  {
+    "name": "RGB and Gesture Sensor",
+    "price": 980,
+    "image": "https://i.ibb.co/8bNhmr5/gesture-sensor.jpg",
+    "stock": 350,
+    "moq": 50,
+    "review": 3
+  },
+  {
+    "name": "Off-Road Wheels",
+    "price": 699,
+    "image": "https://i.ibb.co/JxH1p4g/off-road-wheel.png",
+    "stock": 250,
+    "moq": 30,
+    "review": 4
+  },
+  {
+    "name": "2 Wheel Drive Mobile Robot",
+    "price": 499,
+    "image": "https://i.ibb.co/wRLcY1B/2-wheel-drive.jpg",
+    "stock": 400,
+    "moq": 50,
+    "review": 5
+  },
+  {
+    "name": "Solar Panel 90*90mm",
+    "price": 399,
+    "image": "https://i.ibb.co/m5S4cVy/solar-panel.jpg",
+    "stock": 200,
+    "moq": 20,
+    "review": 4
+  },
+  {
+    "name": "Mini Servo SG90",
+    "price": 195,
+    "image": "https://i.ibb.co/zs7tR9B/mini-servo.png",
+    "stock": 500,
+    "moq": 130,
+    "review": 5
+  },
+  {
+    "name": "5 In 1 Portable CO2 Detector",
+    "price": 4950,
+    "image": "https://i.ibb.co/hcQh7DL/portable-co2-detector.jpg",
+    "stock": 150,
+    "moq": 5,
+    "review": 5
+  }
+]
