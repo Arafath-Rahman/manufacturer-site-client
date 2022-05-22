@@ -11,10 +11,10 @@ const Banner = () => {
         />
         <div className="md:pr-9">
           <h1 className="text-3xl lg:text-5xl font-bold">Get Your Desired Robotic Parts!</h1>
-          <p className="py-6">
+          <p className="py-6 text-slate-700">
             We are the best robotic parts manufacturer in USA. We only wholesale parts around 13 countries around the world including Russia, Germany, England, China, India, Bangladesh and many more. We deliver by Ship/Air, DHL, FedEx any medium you want. Make hurry before our parts stocked out. Call at our hotline number or email us for large contracts.
           </p>
-          <button className="btn btn-primary bg-gradient-to-r from-primary to-secondary text-base-100">Browse Parts</button>
+          <button className="btn btn-primary bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary text-base-100 font-bold">Browse Parts</button>
         </div>
       </div>
     </div>

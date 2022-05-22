@@ -43,7 +43,7 @@ const Navbar = () => {
               />
             </div>
           </div>
-          <Link to="/" className="uppercase text-sm md:text-xl font-bold">
+          <Link to="/" className="uppercase text-sm md:text-xl font-bold text-primary">
             Robotics Parts Store
           </Link>
         </div>
