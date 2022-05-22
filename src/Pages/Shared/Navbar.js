@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const menuItems = ["Home", "Parts", "Reviews"];
@@ -34,9 +35,17 @@ const Navbar = () => {
               ))}
             </ul>
           </div>
-          <a className="btn btn-ghost normal-case text-xl">
+          <div class="avatar">
+            <div className="w-12 mr-2 rounded-xl">
+              <img
+                src="https://i.ibb.co/vBbfXwT/logo-white-bg.png"
+                alt="navbar avatar"
+              />
+            </div>
+          </div>
+          <Link to="/" className="uppercase text-sm md:text-xl font-bold">
             Robotics Parts Store
-          </a>
+          </Link>
         </div>
 
         <div className="navbar-end">
