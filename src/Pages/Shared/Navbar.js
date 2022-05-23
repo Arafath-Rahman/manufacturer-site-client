@@ -30,12 +30,12 @@ const Navbar = () => {
             >
               {menuItems.map((item) => (
                 <li key={item}>
-                  <Link to="" className="font-bold hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-primary hover:to-secondary uppercase mr-5">{item}</Link>
+                  <Link to={`/${item.toLocaleLowerCase()}`} className="font-bold hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-primary hover:to-secondary uppercase mr-5">{item}</Link>
                 </li>
               ))}
             </ul>
           </div>
-          <div class="avatar">
+          <div className="avatar">
             <div className="w-12 mr-2 rounded-xl">
               <img
                 src="https://i.ibb.co/vBbfXwT/logo-white-bg.png"
@@ -53,7 +53,7 @@ const Navbar = () => {
             <ul className="menu-horizontal p-0">
               {menuItems.map((item) => (
                 <li key={item}>
-                  <Link to="" className="font-bold hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-primary hover:to-secondary uppercase mr-5">{item}</Link>
+                  <Link to={`/${item.toLocaleLowerCase()}`} className="font-bold hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-primary hover:to-secondary uppercase mr-5">{item}</Link>
                 </li>
               ))}
             </ul>

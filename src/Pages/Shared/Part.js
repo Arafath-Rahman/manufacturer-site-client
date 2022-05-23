@@ -8,7 +8,7 @@ const Part = ({ part }) => {
   const reviewStarGenerator = review => {
     let stars=[];
     for(let i=0; i<review; i++){
-      stars.push(<span><ImStarFull className="mr-1 text-accent"/></span>)
+      stars.push(<ImStarFull key={i} className="mr-1 text-accent"/>)
     }
     return stars;
   }

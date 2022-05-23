@@ -21,8 +21,8 @@ const Review = ({singleReview}) => {
         </p>
         <div className="card-actions justify-start mt-5">
           <div className="flex gap-4">
-            <div class="avatar">
-              <div class="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+            <div className="avatar">
+              <div className="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                 <img src="https://api.lorem.space/image/face?hash=3174" alt="review avatar"/>
               </div>
             </div>

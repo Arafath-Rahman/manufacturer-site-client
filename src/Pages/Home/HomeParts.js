@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { BsArrowRight } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
+import useParts from "../../hooks/useParts";
+import Loading from "../Shared/Loading";
 import Part from "../Shared/Part";
 
 const HomeParts = () => {
-  const [parts, setParts] = useState([]);
+  const [parts] = useParts();
+  const navigate = useNavigate();
 
-  useEffect( ()=> {
-    fetch('parts-data.json')
-    .then(res => res.json())
-    .then(data => setParts(data))
-  }, []);
+  if(parts.length === 0){
+    return <Loading />;
+  }
 
   return (
     <div className="flex flex-col items-center justify-center bg-no-repeat mb-28">
@@ -22,7 +24,7 @@ const HomeParts = () => {
         }
       </div>
       <div>
-        <button className="btn btn-primary btn-outline text-base-100 rounded-none px-10 py-4">See All Parts <BsArrowRight className="mx-2"/></button>
+        <button onClick={()=> navigate("/parts")} className="btn btn-primary btn-outline text-base-100 rounded-none px-10 py-4">See All Parts <BsArrowRight className="mx-2"/></button>
       </div>
     </div>
   );
