@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Review from '../Shared/Review';
 
 const HomeReviews = () => {
+  const [reviews, setReviews] = useState([]);
+
+  useEffect( ()=> {
+    fetch('review-data.json')
+    .then(res => res.json())
+    .then(data => setReviews(data))
+  }, []);
   return (
     <div className='mb-28 py-24'>
       <div className='my-12 pb-16'>
@@ -9,9 +16,9 @@ const HomeReviews = () => {
       </div>
       <div className='flex justify-center'>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
-          <Review />
-          <Review />
-          <Review />
+        {
+          reviews.slice(0, 3).map((singleReview, i) => <Review key={i} singleReview={singleReview}/>)
+        }
         </div>
       </div>
     </div>

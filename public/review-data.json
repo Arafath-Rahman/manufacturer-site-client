@@ -1,0 +1,34 @@
+[
+  {
+    "name": "Sara Lisbon",
+    "title": "Amazing Parts & Pricing",
+    "description": "The Arduino Uno R3 I purchased from them is working well so far. It was authentic. Shipped very Quickly. No extra charges needed for home delivery. They are reliable.",
+    "review": 5,
+    "image": "",
+    "location": "Upper Darby, USA"
+  },
+  {
+    "name": "John McCafe",
+    "title": "Service was Good",
+    "description": "I purchased 500 servo from them. Product quality is best. Items are working well so far. They were authentic. Took $10 extra charges needed for home delivery but products Shipped very Quickly. Recommended!",
+    "review": 4,
+    "image": "",
+    "location": "Bonn, Germany"
+  },
+  {
+    "name": "Ryan Dale",
+    "title": "Poor Packaging",
+    "description": "Bought 50 solar panels from them. Packaging was pathetic. Shipped very Quickly but 10 of my panels got wasted for poor packaging. Not recommended.",
+    "review": 2,
+    "image": "",
+    "location": "Ian valley, Siberia"
+  },
+  {
+    "name": "Aaron Jack",
+    "title": "Very satisfied with their Service",
+    "description": "I bought 50 LCD from them and products are good also working well so far. They provide authentic products. Shipped very Quickly. No extra charges needed for home delivery. They are reliable. I recommend 100%.",
+    "review": 5,
+    "image": "",
+    "location": "Texas, USA"
+  }
+]
