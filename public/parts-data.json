@@ -1,0 +1,92 @@
+[
+  {
+    "name": "Arduino Uno R3",
+    "description": "The Arduino Uno R3 with Cable is a microcontroller board based on the ATmega328 (datasheet). It has 14 digital input/output pins (of which 6 can be used as PWM outputs); 6 analog inputs, a 16 MHz ceramic resonator, a USB connection, a power jack, an ICSP header, and a reset button.",
+    "price": 1045,
+    "image": "https://i.ibb.co/mbpzdBX/arduino-uno.jpg",
+    "stock": 300,
+    "moq": 50,
+    "review": 5
+  },
+  {
+    "name": "ESP32-CAM WiFi + Bluetooth Camera",
+    "description": "The ESP32 CAM WiFi Module Bluetooth with OV2640 Camera Module 2MP For Face Recognization has a very competitive small-size camera module that can operate independently as a minimum system with a footprint of only 40 x 27 mm; a deep sleep current of up to 6mA and is widely used in various IoT applications.",
+    "price": 1250,
+    "image": "https://i.ibb.co/c1DvhQ4/esp32-cam-wifi-bluetooth-camera.jpg",
+    "stock": 400,
+    "moq": 25,
+    "review": 4
+  },
+  {
+    "name": "Graphic LCD 128x64",
+    "description": "This is a framed graphical LCD 64x128 with LED backlight. This unit is a very clear STN type LCD with a simple command interface. This new module includes the negative voltage circuitry on board! ",
+    "price": 2300,
+    "image": "https://i.ibb.co/C2m3G8B/graphic-lcd.jpg",
+    "stock": 150,
+    "moq": 10,
+    "review": 5
+  },
+  {
+    "name": "Methane Natural Gas Sensor",
+    "description": "This is a simple to use MQ-4 High Sensitivity Gas Methane (CNG) Detector Sensor Module which can sense the presence of Compressed Natural Gas(CNG), methane(CH4), etc in the air. The module uses our MQ-4 sensor. It simplifies the interface to the odd pin spacing of the sensor and provides the interface through standard 4 x 0.1″ header pins.",
+    "price": 155,
+    "image": "https://i.ibb.co/6g495w9/gas-sensor.jpg",
+    "stock": 250,
+    "moq": 100,
+    "review": 5
+  },
+  {
+    "name": "RGB and Gesture Sensor",
+    "description": "This is APDS9960 RGB Gesture Sensor Detection I2C Breakout Module for Arduino; a small breakout board with a built-in APDS-9960 sensor that offers ambient light and color measuring; proximity detection, and touchless gesture sensing. With this RGB and Gesture Sensor you will be able to control a computer; microcontroller, robot, and more with a simple swipe of your hand.",
+    "price": 980,
+    "image": "https://i.ibb.co/8bNhmr5/gesture-sensor.jpg",
+    "stock": 350,
+    "moq": 50,
+    "review": 3
+  },
+  {
+    "name": "Off-Road Wheels",
+    "description": "Big diameter all-terrain off-road wheel for explorer robots & land rover robots. Rubber side is semi-pneumatic which means can be squished. It adds an extra dampening factor to explorer robots. ",
+    "price": 699,
+    "image": "https://i.ibb.co/JxH1p4g/off-road-wheel.png",
+    "stock": 250,
+    "moq": 30,
+    "review": 4
+  },
+  {
+    "name": "2 Wheel Drive Mobile Robot",
+    "description": "This Transparent Robot Smart Car Chassis comes with a quality product. The kit is easy to assemble/disassemble. Now it has become very easy to design robotic smart cars.",
+    "price": 499,
+    "image": "https://i.ibb.co/wRLcY1B/2-wheel-drive.jpg",
+    "stock": 400,
+    "moq": 50,
+    "review": 5
+  },
+  {
+    "name": "Solar Panel 90*90mm",
+    "description": "The 5v 200mA Mini Solar Panel for DIY Projects is ready to use without requiring a frame or special modifications. We have chosen to sell these Polycrystalline solar cells because they are Laser cut to the proper size and encapsulated in the special sun and weather-resistant materials which give them unique characteristics.",
+    "price": 399,
+    "image": "https://i.ibb.co/m5S4cVy/solar-panel.jpg",
+    "stock": 200,
+    "moq": 20,
+    "review": 4
+  },
+  {
+    "name": "Mini Servo SG90",
+    "description": "Getting an original TowerPro Servo Motor is not an economical option at all!!! And is also a very difficult task to recognize and buy an original TowerPro servo, Because there are many suppliers spread over different online shops who are selling fake servo motors under this Brand name.",
+    "price": 195,
+    "image": "https://i.ibb.co/zs7tR9B/mini-servo.png",
+    "stock": 500,
+    "moq": 130,
+    "review": 5
+  },
+  {
+    "name": "5 In 1 Portable CO2 Detector",
+    "description": "5 in 1 CO2 Meter Digital Temperature Humidity Sensor Tester Air Quality Monitor Carbon Dioxide Formaldehyde HCHO Detector Feature: 5-in-1: can use as a carbon dioxide concentration detection, thermometer and hygrometer at the same time. Battery supply: built-in 1500mAh lithium battery, use USB charging cable to charge it.",
+    "price": 4950,
+    "image": "https://i.ibb.co/hcQh7DL/portable-co2-detector.jpg",
+    "stock": 150,
+    "moq": 5,
+    "review": 5
+  }
+]

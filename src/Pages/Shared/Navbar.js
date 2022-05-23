@@ -26,11 +26,11 @@ const Navbar = () => {
             </label>
             <ul
               tabIndex="0"
-              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+              className="menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
               {menuItems.map((item) => (
                 <li key={item}>
-                  <a>{item}</a>
+                  <Link to="" className="font-bold hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-primary hover:to-secondary uppercase mr-5">{item}</Link>
                 </li>
               ))}
             </ul>
@@ -43,7 +43,7 @@ const Navbar = () => {
               />
             </div>
           </div>
-          <Link to="/" className="uppercase text-sm md:text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary">
+          <Link to="/" className="uppercase text-sm md:text-xl text-slate-800 font-extrabold hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-secondary hover:to-primary">
             Robotics Parts Store
           </Link>
         </div>

@@ -3,7 +3,7 @@ import { ImQuotesLeft, ImStarFull } from "react-icons/im";
 
 const Review = () => {
   return (
-    <div className="card w-72 lg:w-80 bg-secondary text-base-10 text-base-100 shadow-xl shadow-slate-400 bg-gradient-to-b from-primary to-secondary    transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-110 duration-300">
+    <div className="card w-72 lg:w-80 bg-secondary text-base-10 text-base-100 shadow-xl shadow-slate-400 bg-gradient-to-b from-primary to-secondary    transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-110 duration-300 hover:cursor-pointer">
       <div className="card-body">
         <div className="flex justify-between mb-4">
           <ImQuotesLeft className="text-base-100 text-5xl" />

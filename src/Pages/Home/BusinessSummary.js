@@ -5,7 +5,7 @@ import { TiGroup } from "react-icons/ti";
 
 const BusinessSummary = () => {
   return (
-    <div className="px-24 bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary py-6 mb-24 shadow-md shadow-slate-400 rounded-md">
+    <div className="px-24 bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary pt-12 pb-12 mb-24 shadow-md shadow-slate-400 rounded-md">
       <div className="mb-12 mt-3">
         <h2 className="text-3xl font-extrabold text-center uppercase">Business Summary</h2>
       </div>
