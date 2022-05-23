@@ -3,7 +3,7 @@ import useParts from "../../hooks/useParts";
 import Loading from "../Shared/Loading";
 import Part from "../Shared/Part";
 
-const Parts = () => {
+const AllParts = () => {
   const [parts] = useParts();
 
   if (parts.length === 0) {
@@ -24,4 +24,4 @@ const Parts = () => {
   );
 };
 
-export default Parts;
+export default AllParts;
