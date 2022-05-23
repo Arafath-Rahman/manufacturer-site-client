@@ -1,8 +1,10 @@
 import React from "react";
 import { ImStarFull } from "react-icons/im";
+import { useNavigate } from "react-router-dom";
 
 const Part = ({ part }) => {
-  const { name, description, price, image, stock, moq, review } = part;
+  const { _id, name, description, price, image, stock, moq, review } = part;
+  const navigate = useNavigate();
 
   //this function generates number of stars based on the review variable in part
   const reviewStarGenerator = review => {
@@ -38,7 +40,7 @@ const Part = ({ part }) => {
           </div>
         </div>
         <div className="card-actions justify-center mt-3">
-          <button className="btn btn-secondary btn-outline w-96 max-w-md rounded-2xl">Place Order</button>
+          <button onClick={()=> navigate(`/parts/${_id}`)} className="btn btn-secondary btn-outline w-96 max-w-md rounded-2xl">Place Order</button>
         </div>
       </div>
     </div>

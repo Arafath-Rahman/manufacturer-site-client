@@ -3,7 +3,7 @@ import useReviews from '../../hooks/useReviews';
 import Review from '../Shared/Review';
 
 const HomeReviews = () => {
-  const [reviews, setReviews] = useReviews();
+  const [reviews] = useReviews();
 
   return (
     <div className='mb-28 py-24'>
