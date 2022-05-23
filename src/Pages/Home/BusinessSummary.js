@@ -5,9 +5,9 @@ import { TiGroup } from "react-icons/ti";
 
 const BusinessSummary = () => {
   return (
-    <div className="px-24 bg-gradient-to-r from-primary to-secondary py-6">
+    <div className="px-24 bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary py-6 mb-24 shadow-md shadow-slate-400 rounded-md">
       <div className="mb-12 mt-3">
-        <h2 className="text-3xl font-bold text-center uppercase">Business Summary</h2>
+        <h2 className="text-3xl font-extrabold text-center uppercase">Business Summary</h2>
       </div>
       <div className="flex flex-col lg:flex-row gap-6 lg:justify-between pb-6">
         <div className="flex flex-col items-center border-y-2 rounded-3xl p-10">

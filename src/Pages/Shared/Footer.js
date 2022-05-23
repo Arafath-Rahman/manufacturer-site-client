@@ -35,7 +35,7 @@ const Footer = () => {
           </div>
           <p>
             Copyright © {new Date().getFullYear()} - All right reserved by{" "}
-            <span className="text-primary font-bold">Robotics Parts Store</span>
+            <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary">Robotics Parts Store</span>
           </p>
         </div>
         <div className="md:place-self-center md:justify-self-end">

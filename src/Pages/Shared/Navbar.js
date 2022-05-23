@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const menuItems = ["Home", "Parts", "Reviews"];
+  const menuItems = ["Home", "Parts", "Reviews", "Login"];
   return (
     <div className="lg:px-12">
       <div className="navbar bg-base-100">
@@ -43,17 +43,17 @@ const Navbar = () => {
               />
             </div>
           </div>
-          <Link to="/" className="uppercase text-sm md:text-xl font-bold text-primary">
+          <Link to="/" className="uppercase text-sm md:text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary">
             Robotics Parts Store
           </Link>
         </div>
 
         <div className="navbar-end">
           <div className="hidden lg:flex">
-            <ul className="menu menu-horizontal p-0">
+            <ul className="menu-horizontal p-0">
               {menuItems.map((item) => (
                 <li key={item}>
-                  <a>{item}</a>
+                  <Link to="" className="font-bold hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-primary hover:to-secondary uppercase mr-5">{item}</Link>
                 </li>
               ))}
             </ul>
