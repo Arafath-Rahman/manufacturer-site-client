@@ -17,12 +17,14 @@ const PartsPurchaseDetail = () => {
 
   const onSubmit = (data) => console.log(data);
 
+  //getting part data
   useEffect(() => {
     fetch(`http://localhost:5000/parts/${partId}`)
       .then((res) => res.json())
       .then((data) => setPart(data));
   }, [partId]);
 
+  //function to generate number of review star
   const reviewStarGenerator = (review) => {
     let stars = [];
     for (let i = 0; i < review; i++) {
@@ -31,9 +33,9 @@ const PartsPurchaseDetail = () => {
     return stars;
   };
 
-
   //watching orders quantity to disable "Order Now" btn
   const watchOrderQuantity = watch("orderQuantity");
+
 
   return (
     <div className="card w-10/12 lg:w-7/12 bg-base-100 shadow-xl mx-auto">
@@ -96,7 +98,7 @@ const PartsPurchaseDetail = () => {
                 />
                 <label className="label block">
                   {errors.orderQuantity && (
-                    <span className="text-sm text-red-500 font-bold flex items-center gap-1">
+                    <span className="text-sm text-red-500 font-bold flex gap-1">
                       <BiErrorCircle />
                       {errors.orderQuantity.message}
                     </span>
@@ -161,8 +163,8 @@ const PartsPurchaseDetail = () => {
             <div className="mt-3 text-center">
               <input
                 type="submit"
-                value="Order Now"
                 disabled={(watchOrderQuantity < part?.moq || watchOrderQuantity > part?.stock)}
+                value="Order Now"
                 className="btn btn-primary"
               />
             </div>
