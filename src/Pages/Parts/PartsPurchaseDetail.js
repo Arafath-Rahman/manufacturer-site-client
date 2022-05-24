@@ -23,7 +23,6 @@ const PartsPurchaseDetail = () => {
       .then((data) => setPart(data));
   }, [partId]);
 
-  
   const reviewStarGenerator = (review) => {
     let stars = [];
     for (let i = 0; i < review; i++) {
@@ -31,6 +30,10 @@ const PartsPurchaseDetail = () => {
     }
     return stars;
   };
+
+
+  //watching orders quantity to disable "Order Now" btn
+  const watchOrderQuantity = watch("orderQuantity");
 
   return (
     <div className="card w-10/12 lg:w-7/12 bg-base-100 shadow-xl mx-auto">
@@ -64,35 +67,102 @@ const PartsPurchaseDetail = () => {
           </div>
         </div>
         <div className="card-actions flex flex-col justify-center items-center mb-8">
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="form-control w-full max-w-xs">
+          <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-start">
+            <div className="w-full max-w-xs flex items-center">
               <label className="label">
-                <span className="text-center mx-auto font-bold text-slate-800">
-                  Order Quantity
+                <span className="text-center mx-auto font-bold text-slate-800 mr-2">
+                  Order Quantity: 
                 </span>
               </label>
-              <input
-                type="number"
-                className="input input-bordered input-primary w-full max-w-xs"
-                {...register("test", {
-                  max: {
-                    value: 5,
-                    message: "You can order maximum x pieces",
-                  },
-                  min: {
-                    value: 3,
-                    message: "You have to order minimum x pieces",
-                  },
-                })}
-              />
-              <label class="label block">
-                {errors.test && <span class="text-sm text-red-500 font-bold flex items-center gap-1"><BiErrorCircle />{errors.test.message}</span>}
+              <div>
+                <input
+                  type="number"
+                  defaultValue={part?.moq}
+                  className="input input-bordered input-primary input-sm w-full max-w-xs mt-5"
+                  {...register("orderQuantity", {
+                    required: {
+                      value: true,
+                      message: "Order Quantity is required",
+                    },
+                    max: {
+                      value: `${part?.stock}`,
+                      message: `You can order maximum ${part?.stock} pieces`,
+                    },
+                    min: {
+                      value: `${part?.moq}`,
+                      message: `You have to order minimum ${part?.moq} pieces`,
+                    },
+                  })}
+                />
+                <label className="label block">
+                  {errors.orderQuantity && (
+                    <span className="text-sm text-red-500 font-bold flex items-center gap-1">
+                      <BiErrorCircle />
+                      {errors.orderQuantity.message}
+                    </span>
+                  )}
+                </label>
+              </div>
+            </div>
+            <div className="w-full max-w-xs flex items-center">
+              <label className="label">
+                <span className="text-center mx-auto font-bold text-slate-800 mr-2">
+                  Address:
+                </span>
               </label>
+              <div>
+                <input
+                  type="text"
+                  className="input input-bordered input-primary input-sm w-full max-w-xs mt-5"
+                  {...register("address", {
+                    required: {
+                      value: true,
+                      message: "Address is required",
+                    },
+                  })}
+                />
+                <label className="label block">
+                  {errors.address && (
+                    <span className="text-sm text-red-500 font-bold flex items-center gap-1">
+                      <BiErrorCircle />
+                      {errors.address.message}
+                    </span>
+                  )}
+                </label>
+              </div>
+            </div>
+            <div className="w-full max-w-xs flex items-center">
+              <label className="label">
+                <span className="text-center mx-auto font-bold text-slate-800 mr-2">
+                  Phone:
+                </span>
+              </label>
+              <div>
+                <input
+                  type="text"
+                  className="input input-bordered input-primary input-sm w-full max-w-xs mt-5"
+                  {...register("phone", {
+                    required: {
+                      value: true,
+                      message: "Phone Number is required",
+                    },
+                  })}
+                />
+                <label className="label block">
+                  {errors.phone && (
+                    <span className="text-sm text-red-500 font-bold flex items-center gap-1">
+                      <BiErrorCircle />
+                      {errors.phone.message}
+                    </span>
+                  )}
+                </label>
+              </div>
             </div>
             <div className="mt-3 text-center">
               <input
                 type="submit"
                 value="Order Now"
+                disabled={(watchOrderQuantity < part?.moq || watchOrderQuantity > part?.stock)}
                 className="btn btn-primary"
               />
             </div>
