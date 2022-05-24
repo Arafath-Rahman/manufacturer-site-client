@@ -1,17 +1,41 @@
 import React from "react";
+import {
+  useSignInWithEmailAndPassword,
+  useSignInWithGoogle
+} from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { BiErrorCircle } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import { FcGoogle } from "react-icons/fc";
+import { Link, useNavigate } from "react-router-dom";
+import auth from "../../firebase.init";
+import Loading from "../Shared/Loading";
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const [signInWithEmailAndPassword, lUser, lLoading, lError] =
+    useSignInWithEmailAndPassword(auth);
+
+  const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+
+  //form submit handler
+  const onSubmit = (data) => {
+    signInWithEmailAndPassword(data.email, data.password);
+  };
+
+  if (lLoading) {
+    return <Loading />;
+  }
+
+  if (lUser) {
+    navigate("/");
+  }
 
   return (
     <div className="hero">
@@ -76,7 +100,7 @@ const Login = () => {
                   </a>
                 </label> */}
                 <span className="card-actions flex justify-center text-sm text-slate-800 mt-3 mb-0">
-                  Need an account? 
+                  Need an account?
                   <Link to="/signup" className="link link-hover text-secondary">
                     Signup here
                   </Link>
@@ -90,6 +114,12 @@ const Login = () => {
                 />
               </div>
             </form>
+            <div className="divider">OR</div>
+            <div className="card-actions justify-center">
+              <button onClick={()=> signInWithGoogle()} className="btn btn-outline btn-secondary rounded-lg">
+                <FcGoogle className="text-xl mr-2" /> Continue with Google
+              </button>
+            </div>
           </div>
         </div>
       </div>

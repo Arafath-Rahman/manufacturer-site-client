@@ -1,17 +1,42 @@
 import React from "react";
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { BiErrorCircle } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import { FcGoogle } from "react-icons/fc";
+import { Link, useNavigate } from "react-router-dom";
+import auth from "../../firebase.init";
+import Loading from "../Shared/Loading";
+
 
 const Signup = () => {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
+    reset,
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const [createUserWithEmailAndPassword, cUser, cLoading, cError] =
+    useCreateUserWithEmailAndPassword(auth);
+
+  
+  const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+
+  //form submit handler
+  const onSubmit = (data) => {
+    createUserWithEmailAndPassword(data.email, data.password);
+    reset();
+  };
+
+  if (cLoading || gLoading) {
+    return <Loading />;
+  }
+
+  if(cUser || gUser){
+    navigate("/");
+  }
 
   return (
     <div className="hero">
@@ -112,6 +137,12 @@ const Signup = () => {
                 />
               </div>
             </form>
+            <div className="divider">OR</div>
+            <div className="card-actions justify-center">
+              <button onClick={()=> signInWithGoogle()} className="btn btn-outline btn-secondary rounded-lg">
+                <FcGoogle className="text-xl mr-2" /> Continue with Google
+              </button>
+            </div>
           </div>
         </div>
       </div>
