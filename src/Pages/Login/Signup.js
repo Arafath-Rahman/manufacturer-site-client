@@ -1,5 +1,9 @@
 import { React, useContext } from "react";
-import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from "react-firebase-hooks/auth";
+import {
+  useCreateUserWithEmailAndPassword,
+  useSignInWithGoogle,
+  useUpdateProfile
+} from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { BiErrorCircle } from "react-icons/bi";
 import { FcGoogle } from "react-icons/fc";
@@ -8,7 +12,6 @@ import { NameContext } from "../../App";
 import auth from "../../firebase.init";
 import useToken from "../../hooks/useToken";
 import Loading from "../Shared/Loading";
-
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -22,11 +25,17 @@ const Signup = () => {
 
   const [createUserWithEmailAndPassword, cUser, cLoading, cError] =
     useCreateUserWithEmailAndPassword(auth);
+
   const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+
   const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
-  
+
   const [ , setUserName] = useContext(NameContext);
-  
+
+  if (gUser) {
+    setUserName(gUser.user.displayName);
+  }
+
   //form submit handler
   const onSubmit = async (data) => {
     console.log(data);
@@ -35,18 +44,15 @@ const Signup = () => {
     setUserName(data.displayName);
     reset();
   };
+
   
   const [token] = useToken(cUser || gUser);
-
-  if(gUser){
-    setUserName(gUser.user.displayName);
-  }
 
   if (cLoading || gLoading || updating) {
     return <Loading />;
   }
-
-  if(token){
+  
+  if (token) {
     navigate("/");
   }
 
@@ -60,7 +66,6 @@ const Signup = () => {
       </p>
     );
   }
-
 
   return (
     <div className="hero">
@@ -159,7 +164,10 @@ const Signup = () => {
             </form>
             <div className="divider">OR</div>
             <div className="card-actions justify-center">
-              <button onClick={()=> signInWithGoogle()} className="btn btn-outline btn-secondary rounded-lg">
+              <button
+                onClick={() => signInWithGoogle()}
+                className="btn btn-outline btn-secondary rounded-lg"
+              >
                 <FcGoogle className="text-xl mr-2" /> Continue with Google
               </button>
             </div>

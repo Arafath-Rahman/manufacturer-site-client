@@ -77,7 +77,7 @@ const PartsPurchaseDetail = () => {
             onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col items-start"
           >
-            <div className="w-full max-w-xs flex items-center">
+            <div className="w-full max-w-xs flex items-center mb-3">
               <label className="label">
                 <span className="text-center mx-auto font-bold text-slate-800 mr-2">Name</span>
               </label>
@@ -191,7 +191,7 @@ const PartsPurchaseDetail = () => {
                 </label>
               </div>
             </div>
-            <div className="mt-3 text-center">
+            <div className="mt-3">
               <input
                 type="submit"
                 disabled={

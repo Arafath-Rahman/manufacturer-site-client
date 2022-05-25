@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   useSignInWithEmailAndPassword,
   useSignInWithGoogle
@@ -7,11 +7,13 @@ import { useForm } from "react-hook-form";
 import { BiErrorCircle } from "react-icons/bi";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { NameContext } from "../../App";
 import auth from "../../firebase.init";
 import useToken from "../../hooks/useToken";
 import Loading from "../Shared/Loading";
 
 const Login = () => {
+  const [ , setUserName] = useContext(NameContext);
   const navigate = useNavigate();
   let location = useLocation();
   let from = location.state?.from?.pathname || "/";
@@ -26,6 +28,13 @@ const Login = () => {
     useSignInWithEmailAndPassword(auth);
 
   const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+
+  if (gUser) {
+    setUserName(gUser.user.displayName);
+  }
+  else if (lUser) {
+    setUserName(lUser.user.displayName);
+  }
 
   const [token] = useToken(lUser || gUser);
 
