@@ -1,6 +1,7 @@
 import { signOut } from "firebase/auth";
 import React, { useContext } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { BiMenuAltRight } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { NameContext } from "../../App";
 import auth from "../../firebase.init";
@@ -11,19 +12,19 @@ const Navbar = () => {
   const menuItems = ["Home", "Parts", "Reviews"];
   const [user, loading] = useAuthState(auth);
   const [userName] = useContext(NameContext);
-  const [userInfo]  = useUserInfo(user?.email);
-  
+  const [userInfo] = useUserInfo(user?.email);
+
   const logOut = () => {
     signOut(auth);
     localStorage.removeItem("accessToken");
   };
 
-  if(loading){
+  if (loading) {
     return <Loading />;
   }
 
   console.log(userInfo);
-  
+
   return (
     <div className="lg:px-12">
       <div className="navbar bg-base-100">
@@ -59,7 +60,7 @@ const Navbar = () => {
                   </Link>
                 </li>
               ))}
-              {!user?.email&& (
+              {!user?.email && (
                 <li>
                   <Link
                     to="/login"
@@ -69,7 +70,7 @@ const Navbar = () => {
                   </Link>
                 </li>
               )}
-              {user?.email&& (
+              {user?.email && (
                 <li>
                   <Link
                     to="/dashboard"
@@ -134,8 +135,17 @@ const Navbar = () => {
           </div>
           {user?.email && (
             <div className="dropdown dropdown-end flex items-center">
-              <span className="text-secondary font-bold mr-1" title={userName === 'user' ? userInfo?.name : userName}>
-                {userName === 'user' ? (userInfo?.name?.length > 10 ? userInfo?.name?.slice(0, 10) + "..." : userInfo?.name) : (userName.length > 10 ? userName?.slice(0, 10) + "..." : userName)}
+              <span
+                className="text-secondary font-bold mr-1"
+                title={userName === "user" ? userInfo?.name : userName}
+              >
+                {userName === "user"
+                  ? userInfo?.name?.length > 10
+                    ? userInfo?.name?.slice(0, 10) + "..."
+                    : userInfo?.name
+                  : userName.length > 10
+                  ? userName?.slice(0, 10) + "..."
+                  : userName}
               </span>
               {user?.photoURL ? (
                 <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
@@ -144,9 +154,18 @@ const Navbar = () => {
                   </div>
                 </label>
               ) : (
-                <label tabIndex="0" className="btn btn-ghost btn-circle avatar placeholder">
+                <label
+                  tabIndex="0"
+                  className="btn btn-ghost btn-circle avatar placeholder"
+                >
                   <div className="w-10 bg-neutral-focus text-neutral-content rounded-full">
-                    {user?.email && <span>{userName === 'user' ? userInfo?.name?.charAt(0) : userName?.charAt(0) }</span>}
+                    {user?.email && (
+                      <span>
+                        {userName === "user"
+                          ? userInfo?.name?.charAt(0)
+                          : userName?.charAt(0)}
+                      </span>
+                    )}
                   </div>
                 </label>
               )}
@@ -155,10 +174,12 @@ const Navbar = () => {
                 className="mt-48 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
               >
                 <li>
-                  <Link to="" className="justify-between">Profile</Link>
+                  <Link to="" className="justify-between">
+                    Profile
+                  </Link>
                 </li>
                 <li>
-                  <Link to="" >Settings</Link>
+                  <Link to="">Settings</Link>
                 </li>
                 {user?.email && (
                   <li>
@@ -173,6 +194,13 @@ const Navbar = () => {
               </ul>
             </div>
           )}
+          {/* sidebar btn */}
+          <label
+            htmlFor="dashboard-drawer"
+            className="btn btn-sm btn-outline btn-primary p-0 btn-drawer lg:hidden"
+          >
+            <BiMenuAltRight className="w-8 h-8" />{/* <img src={sidebar} alt="sidebar" /> */}
+          </label>
         </div>
       </div>
     </div>
