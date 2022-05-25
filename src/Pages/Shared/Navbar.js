@@ -23,8 +23,6 @@ const Navbar = () => {
     return <Loading />;
   }
 
-  console.log(userInfo);
-
   return (
     <div className="lg:px-12">
       <div className="navbar bg-base-100">

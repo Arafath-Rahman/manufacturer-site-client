@@ -3,12 +3,14 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { BiErrorCircle } from "react-icons/bi";
 import { ImStarFull } from "react-icons/im";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import auth from "../../firebase.init";
 import useUserInfo from "../../hooks/useUserInfo";
 
 const PartsPurchaseDetail = () => {
   const { partId } = useParams();
+  const navigate = useNavigate();
   const [part, setPart] = useState(null);
   const [user] = useAuthState(auth);
   const [userInfo] = useUserInfo(user?.email);
@@ -20,15 +22,48 @@ const PartsPurchaseDetail = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    const totalPrice = part.price * data.orderQuantity;
+    const order = {
+      userName: userInfo.name,
+      userEmail: userInfo.email,
+      userAddress: data.address,
+      userPhone: data.phone,
+      partId: part._id,
+      partName: part.name,
+      orderQuantity: data.orderQuantity,
+      totalPrice: totalPrice,
+      paid: false,
+      transactionId: "none",
+    };
+
+    //adding data to orderCollection
+    fetch("http://localhost:5000/order", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(order),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          toast.success(
+            'Order Place successful.'
+          );
+          navigate("/parts")
+        }
+        // refetch();
+      });
+  };
 
   //getting part data
   useEffect(() => {
     fetch(`http://localhost:5000/parts/${partId}`, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-      }
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
     })
       .then((res) => res.json())
       .then((data) => setPart(data));
@@ -84,10 +119,13 @@ const PartsPurchaseDetail = () => {
           >
             <div className="w-full max-w-xs flex items-center mb-3">
               <label className="label">
-                <span className="text-center mx-auto font-bold text-slate-800 mr-2">Name</span>
+                <span className="text-center mx-auto font-bold text-slate-800 mr-2">
+                  Name
+                </span>
               </label>
               <input
                 type="text"
+                value={userInfo?.name}
                 defaultValue={userInfo?.name}
                 disabled={true}
                 className="input input-bordered w-full"
@@ -96,10 +134,13 @@ const PartsPurchaseDetail = () => {
             </div>
             <div className="w-full max-w-xs flex items-center">
               <label className="label">
-                <span className="text-center mx-auto font-bold text-slate-800 mr-2">Email</span>
+                <span className="text-center mx-auto font-bold text-slate-800 mr-2">
+                  Email
+                </span>
               </label>
               <input
                 type="text"
+                value={userInfo?.email}
                 defaultValue={userInfo?.email}
                 disabled={true}
                 className="input input-bordered w-full"
