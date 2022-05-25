@@ -151,7 +151,7 @@ const PartsPurchaseDetail = () => {
               <div>
                 <input
                   type="text"
-                  className="input input-bordered input-primary input-sm w-full max-w-xs mt-5"
+                  className="input input-bordered input-primary input-sm w-full mt-5"
                   {...register("address", {
                     required: {
                       value: true,
@@ -178,7 +178,7 @@ const PartsPurchaseDetail = () => {
               <div>
                 <input
                   type="text"
-                  className="input input-bordered input-primary input-sm w-full max-w-xs mt-5"
+                  className="input input-bordered input-primary input-sm w-full mt-5"
                   {...register("phone", {
                     required: {
                       value: true,

@@ -69,6 +69,16 @@ const Navbar = () => {
                   </Link>
                 </li>
               )}
+              {user?.email&& (
+                <li>
+                  <Link
+                    to="/dashboard"
+                    className="font-bold hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-primary hover:to-secondary uppercase mr-5"
+                  >
+                    Dashboard
+                  </Link>
+                </li>
+              )}
             </ul>
           </div>
           <div className="avatar">
@@ -107,6 +117,16 @@ const Navbar = () => {
                     className="font-bold hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-primary hover:to-secondary uppercase mr-5"
                   >
                     Login
+                  </Link>
+                </li>
+              )}
+              {user?.email && (
+                <li>
+                  <Link
+                    to="/dashboard"
+                    className="font-bold hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-primary hover:to-secondary uppercase mr-5"
+                  >
+                    Dashboard
                   </Link>
                 </li>
               )}
