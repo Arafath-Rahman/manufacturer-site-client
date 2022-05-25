@@ -4,12 +4,14 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
 import { NameContext } from "../../App";
 import auth from "../../firebase.init";
-import Loading from '../Shared/Loading';
+import useUserInfo from "../../hooks/useUserInfo";
+import Loading from "./Loading";
 
 const Navbar = () => {
   const menuItems = ["Home", "Parts", "Reviews"];
   const [user, loading] = useAuthState(auth);
   const [userName] = useContext(NameContext);
+  const [userInfo]  = useUserInfo(user?.email);
   
   const logOut = () => {
     signOut(auth);
@@ -20,6 +22,8 @@ const Navbar = () => {
     return <Loading />;
   }
 
+  console.log(userInfo);
+  
   return (
     <div className="lg:px-12">
       <div className="navbar bg-base-100">
@@ -55,7 +59,7 @@ const Navbar = () => {
                   </Link>
                 </li>
               ))}
-              {!(user?.email && !loading) && (
+              {!user?.email&& (
                 <li>
                   <Link
                     to="/login"
@@ -96,7 +100,7 @@ const Navbar = () => {
                   </Link>
                 </li>
               ))}
-              {!(user?.email && !loading) && (
+              {!user?.email && (
                 <li>
                   <Link
                     to="/login"
@@ -108,10 +112,10 @@ const Navbar = () => {
               )}
             </ul>
           </div>
-          {(user?.email && !loading) && (
+          {user?.email && (
             <div className="dropdown dropdown-end flex items-center">
-              <span className="text-secondary font-bold mr-1" title={userName}>
-                {userName?.length > 10 ? userName?.slice(0, 10) + "..." : userName}
+              <span className="text-secondary font-bold mr-1" title={userName === 'user' ? userInfo?.name : userName}>
+                {userName === 'user' ? (userInfo?.name?.length > 10 ? userInfo?.name?.slice(0, 10) + "..." : userInfo?.name) : (userName.length > 10 ? userName?.slice(0, 10) + "..." : userName)}
               </span>
               {user?.photoURL ? (
                 <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
@@ -122,7 +126,7 @@ const Navbar = () => {
               ) : (
                 <label tabIndex="0" className="btn btn-ghost btn-circle avatar placeholder">
                   <div className="w-10 bg-neutral-focus text-neutral-content rounded-full">
-                    {user?.email && <span>{userName?.charAt(0)}</span>}
+                    {user?.email && <span>{userName === 'user' ? userInfo?.name?.charAt(0) : userName?.charAt(0) }</span>}
                   </div>
                 </label>
               )}
@@ -136,7 +140,7 @@ const Navbar = () => {
                 <li>
                   <Link to="" >Settings</Link>
                 </li>
-                {(user?.email && !loading) && (
+                {user?.email && (
                   <li>
                     <button
                       onClick={() => logOut()}

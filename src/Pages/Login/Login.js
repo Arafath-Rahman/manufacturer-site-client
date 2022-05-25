@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { BiErrorCircle } from "react-icons/bi";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { NameContext } from "../../App";
 import auth from "../../firebase.init";
 import useToken from "../../hooks/useToken";
@@ -44,7 +45,8 @@ const Login = () => {
   };
 
   useEffect( ()=> {
-    if( token ){
+    if(token){
+      toast.success("Login Successful", { toastId: "loginSuccess"});
       navigate(from, { replace: true });
     }
   } , [token, from, navigate]);

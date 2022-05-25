@@ -17,7 +17,7 @@ const AllParts = () => {
       </div>
       <div className="pt-24 grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {
-          parts.map(part => <Part key={part._id} part={part} />)
+          parts?.map(part => <Part key={part._id} part={part} />)
         }
       </div>
     </div>

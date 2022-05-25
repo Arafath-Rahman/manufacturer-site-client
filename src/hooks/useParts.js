@@ -4,7 +4,12 @@ const useParts = () => {
   const [parts, setParts] = useState([]);
 
   useEffect( ()=> {
-    fetch('http://localhost:5000/parts')
+    fetch('http://localhost:5000/parts', {
+      method: 'GET',
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      }
+    })
     .then(res => res.json())
     .then(data => setParts(data))
   }, []);

@@ -24,7 +24,12 @@ const PartsPurchaseDetail = () => {
 
   //getting part data
   useEffect(() => {
-    fetch(`http://localhost:5000/parts/${partId}`)
+    fetch(`http://localhost:5000/parts/${partId}`, {
+      method: 'GET',
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      }
+    })
       .then((res) => res.json())
       .then((data) => setPart(data));
   }, [partId]);
@@ -83,9 +88,9 @@ const PartsPurchaseDetail = () => {
               </label>
               <input
                 type="text"
-                value={userInfo?.name}
+                defaultValue={userInfo?.name}
                 disabled={true}
-                className="input input-bordered"
+                className="input input-bordered w-full"
                 {...register("displayName")}
               />
             </div>
@@ -95,9 +100,9 @@ const PartsPurchaseDetail = () => {
               </label>
               <input
                 type="text"
-                value={userInfo?.email}
+                defaultValue={userInfo?.email}
                 disabled={true}
-                className="input input-bordered"
+                className="input input-bordered w-full"
                 {...register("email")}
               />
             </div>
