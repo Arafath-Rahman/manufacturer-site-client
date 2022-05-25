@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { BiErrorCircle } from "react-icons/bi";
 import { ImStarFull } from "react-icons/im";
 import { useParams } from "react-router-dom";
+import auth from "../../firebase.init";
+import useUserInfo from "../../hooks/useUserInfo";
 
 const PartsPurchaseDetail = () => {
   const { partId } = useParams();
   const [part, setPart] = useState(null);
+  const [user] = useAuthState(auth);
+  const [userInfo] = useUserInfo(user?.email);
 
   const {
     register,
@@ -35,7 +40,6 @@ const PartsPurchaseDetail = () => {
 
   //watching orders quantity to disable "Order Now" btn
   const watchOrderQuantity = watch("orderQuantity");
-
 
   return (
     <div className="card w-10/12 lg:w-7/12 bg-base-100 shadow-xl mx-auto">
@@ -69,11 +73,38 @@ const PartsPurchaseDetail = () => {
           </div>
         </div>
         <div className="card-actions flex flex-col justify-center items-center mb-8">
-          <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-start">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="flex flex-col items-start"
+          >
+            <div className="w-full max-w-xs flex items-center">
+              <label className="label">
+                <span className="text-center mx-auto font-bold text-slate-800 mr-2">Name</span>
+              </label>
+              <input
+                type="text"
+                value={userInfo?.name}
+                disabled={true}
+                className="input input-bordered"
+                {...register("displayName")}
+              />
+            </div>
+            <div className="w-full max-w-xs flex items-center">
+              <label className="label">
+                <span className="text-center mx-auto font-bold text-slate-800 mr-2">Email</span>
+              </label>
+              <input
+                type="text"
+                value={userInfo?.email}
+                disabled={true}
+                className="input input-bordered"
+                {...register("email")}
+              />
+            </div>
             <div className="w-full max-w-xs flex items-center">
               <label className="label">
                 <span className="text-center mx-auto font-bold text-slate-800 mr-2">
-                  Order Quantity: 
+                  Order Quantity:
                 </span>
               </label>
               <div>
@@ -163,7 +194,10 @@ const PartsPurchaseDetail = () => {
             <div className="mt-3 text-center">
               <input
                 type="submit"
-                disabled={(watchOrderQuantity < part?.moq || watchOrderQuantity > part?.stock)}
+                disabled={
+                  watchOrderQuantity < part?.moq ||
+                  watchOrderQuantity > part?.stock
+                }
                 value="Order Now"
                 className="btn btn-primary"
               />

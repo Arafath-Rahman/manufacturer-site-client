@@ -1,10 +1,12 @@
-import React from "react";
-import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
+import { React, useContext } from "react";
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { BiErrorCircle } from "react-icons/bi";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
+import { NameContext } from "../../App";
 import auth from "../../firebase.init";
+import useToken from "../../hooks/useToken";
 import Loading from "../Shared/Loading";
 
 
@@ -20,23 +22,45 @@ const Signup = () => {
 
   const [createUserWithEmailAndPassword, cUser, cLoading, cError] =
     useCreateUserWithEmailAndPassword(auth);
-
-  
+  const [updateProfile, updating, updateError] = useUpdateProfile(auth);
   const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
-
+  
+  const [ , setUserName] = useContext(NameContext);
+  
   //form submit handler
-  const onSubmit = (data) => {
-    createUserWithEmailAndPassword(data.email, data.password);
+  const onSubmit = async (data) => {
+    console.log(data);
+    await createUserWithEmailAndPassword(data.email, data.password);
+    await updateProfile({ displayName: data.displayName });
+    setUserName(data.displayName);
     reset();
   };
+  
+  const [token] = useToken(cUser || gUser);
 
-  if (cLoading || gLoading) {
+  if(gUser){
+    setUserName(gUser.user.displayName);
+  }
+
+  if (cLoading || gLoading || updating) {
     return <Loading />;
   }
 
-  if(cUser || gUser){
+  if(token){
     navigate("/");
   }
+
+  let signupError;
+  if (cError || gError || updateError) {
+    signupError = (
+      <p className="text-red-500 mt-3 font-bold">
+        <small>
+          {cError?.message || gError?.message || updateError.message}
+        </small>
+      </p>
+    );
+  }
+
 
   return (
     <div className="hero">
@@ -56,17 +80,17 @@ const Signup = () => {
                   type="text"
                   placeholder="Your Name"
                   className="input input-bordered"
-                  {...register("name", {
+                  {...register("displayName", {
                     required: {
                       value: true,
                       message: "Name is required",
                     },
                   })}
                 />
-                {errors.name && (
+                {errors.displayName && (
                   <span className="text-sm text-red-500 font-bold flex gap-1">
                     <BiErrorCircle />
-                    {errors.name.message}
+                    {errors.displayName.message}
                   </span>
                 )}
               </div>
@@ -117,11 +141,6 @@ const Signup = () => {
                     {errors.password.message}
                   </span>
                 )}
-                {/* <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">
-                    Forgot password?
-                  </a>
-                </label> */}
                 <span className="card-actions flex justify-center text-sm text-slate-800 mt-3 mb-0">
                   Already have an account?
                   <Link to="/login" className="link link-hover text-secondary">
@@ -129,6 +148,7 @@ const Signup = () => {
                   </Link>
                 </span>
               </div>
+              {signupError}
               <div className="form-control mt-6">
                 <input
                   type="submit"

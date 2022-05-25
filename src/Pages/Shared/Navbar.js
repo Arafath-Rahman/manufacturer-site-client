@@ -1,8 +1,25 @@
-import React from "react";
+import { signOut } from "firebase/auth";
+import React, { useContext } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
+import { NameContext } from "../../App";
+import auth from "../../firebase.init";
+import Loading from '../Shared/Loading';
 
 const Navbar = () => {
-  const menuItems = ["Home", "Parts", "Reviews", "Login"];
+  const menuItems = ["Home", "Parts", "Reviews"];
+  const [user, loading] = useAuthState(auth);
+  const [userName] = useContext(NameContext);
+  
+  const logOut = () => {
+    signOut(auth);
+    localStorage.removeItem("accessToken");
+  };
+
+  if(loading){
+    return <Loading />;
+  }
+
   return (
     <div className="lg:px-12">
       <div className="navbar bg-base-100">
@@ -30,20 +47,38 @@ const Navbar = () => {
             >
               {menuItems.map((item) => (
                 <li key={item}>
-                  <Link to={`/${item.toLocaleLowerCase()}`} className="font-bold hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-primary hover:to-secondary uppercase mr-5">{item}</Link>
+                  <Link
+                    to={`/${item.toLocaleLowerCase()}`}
+                    className="font-bold hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-primary hover:to-secondary uppercase mr-5"
+                  >
+                    {item}
+                  </Link>
                 </li>
               ))}
+              {!(user?.email && !loading) && (
+                <li>
+                  <Link
+                    to="/login"
+                    className="font-bold hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-primary hover:to-secondary uppercase mr-5"
+                  >
+                    Login
+                  </Link>
+                </li>
+              )}
             </ul>
           </div>
           <div className="avatar">
             <div className="w-12 mr-2 rounded-xl">
               <img
                 src="https://i.ibb.co/vBbfXwT/logo-white-bg.png"
-                alt="navbar avatar"
+                alt="navbar logo"
               />
             </div>
           </div>
-          <Link to="/" className="uppercase text-sm md:text-xl text-slate-800 font-extrabold hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-secondary hover:to-primary">
+          <Link
+            to="/"
+            className="uppercase text-sm md:text-xl text-slate-800 font-extrabold hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-secondary hover:to-primary"
+          >
             Robotics Parts Store
           </Link>
         </div>
@@ -53,32 +88,67 @@ const Navbar = () => {
             <ul className="menu-horizontal p-0">
               {menuItems.map((item) => (
                 <li key={item}>
-                  <Link to={`/${item.toLocaleLowerCase()}`} className="font-bold hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-primary hover:to-secondary uppercase mr-5">{item}</Link>
+                  <Link
+                    to={`/${item.toLocaleLowerCase()}`}
+                    className="font-bold hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-primary hover:to-secondary uppercase mr-5"
+                  >
+                    {item}
+                  </Link>
                 </li>
               ))}
+              {!(user?.email && !loading) && (
+                <li>
+                  <Link
+                    to="/login"
+                    className="font-bold hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-primary hover:to-secondary uppercase mr-5"
+                  >
+                    Login
+                  </Link>
+                </li>
+              )}
             </ul>
           </div>
-          <div className="dropdown dropdown-end">
-            <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-full">
-                <img
-                  src="https://api.lorem.space/image/face?hash=33791"
-                  alt="avatar"
-                />
-              </div>
-            </label>
-            <ul
-              tabIndex="0"
-              className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
-            >
-              <li>
-                <a className="justify-between">Profile</a>
-              </li>
-              <li>
-                <a>Settings</a>
-              </li>
-            </ul>
-          </div>
+          {(user?.email && !loading) && (
+            <div className="dropdown dropdown-end flex items-center">
+              <span className="text-secondary font-bold mr-1" title={userName}>
+                {userName?.length > 10 ? userName?.slice(0, 10) + "..." : userName}
+              </span>
+              {user?.photoURL ? (
+                <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
+                  <div className="w-10 rounded-full">
+                    <img src={user?.photoURL} alt="user" />
+                  </div>
+                </label>
+              ) : (
+                <label tabIndex="0" className="btn btn-ghost btn-circle avatar placeholder">
+                  <div className="w-10 bg-neutral-focus text-neutral-content rounded-full">
+                    {user?.email && <span>{userName?.charAt(0)}</span>}
+                  </div>
+                </label>
+              )}
+              <ul
+                tabIndex="0"
+                className="mt-48 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
+              >
+                <li>
+                  <Link to="" className="justify-between">Profile</Link>
+                </li>
+                <li>
+                  <Link to="" >Settings</Link>
+                </li>
+                {(user?.email && !loading) && (
+                  <li>
+                    <button
+                      onClick={() => logOut()}
+                      className="btn btn-outline btn-secondary btn-sm"
+                    >
+                      Logout
+                    </button>
+                  </li>
+                )}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     </div>

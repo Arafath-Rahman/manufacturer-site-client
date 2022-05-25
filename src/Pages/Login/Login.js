@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   useSignInWithEmailAndPassword,
   useSignInWithGoogle
@@ -6,12 +6,15 @@ import {
 import { useForm } from "react-hook-form";
 import { BiErrorCircle } from "react-icons/bi";
 import { FcGoogle } from "react-icons/fc";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
+import useToken from "../../hooks/useToken";
 import Loading from "../Shared/Loading";
 
 const Login = () => {
   const navigate = useNavigate();
+  let location = useLocation();
+  let from = location.state?.from?.pathname || "/";
 
   const {
     register,
@@ -24,18 +27,29 @@ const Login = () => {
 
   const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
 
+  const [token] = useToken(lUser || gUser);
+
   //form submit handler
   const onSubmit = (data) => {
     signInWithEmailAndPassword(data.email, data.password);
   };
 
-  if (lLoading) {
+  useEffect( ()=> {
+    if( token ){
+      navigate(from, { replace: true });
+    }
+  } , [token, from, navigate]);
+  
+
+  if (lLoading || gLoading) {
     return <Loading />;
   }
 
-  if (lUser) {
-    navigate("/");
-  }
+    //setup google/user error message
+    let signupError;
+    if (lError || gError) {
+      signupError = <p className="text-red-500 mt-3 font-bold"><small>{ lError?.message || gError?.message }</small></p>;
+    }
 
   return (
     <div className="hero">
@@ -94,11 +108,6 @@ const Login = () => {
                     {errors.password.message}
                   </span>
                 )}
-                {/* <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">
-                    Forgot password?
-                  </a>
-                </label> */}
                 <span className="card-actions flex justify-center text-sm text-slate-800 mt-3 mb-0">
                   Need an account?
                   <Link to="/signup" className="link link-hover text-secondary">
@@ -106,6 +115,7 @@ const Login = () => {
                   </Link>
                 </span>
               </div>
+              {signupError}
               <div className="form-control mt-6">
                 <input
                   type="submit"
