@@ -27,7 +27,7 @@ const MyProfile = () => {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
-    }).then(res => res.json())
+    }).then((res) => res.json())
   );
 
   //form submit handler
@@ -65,42 +65,49 @@ const MyProfile = () => {
   return (
     <div>
       <div className="py-5">
-        <h2 className="text-2xl font-bold text-primary text-center my-4">
+        <h2 className="text-2xl font-bold text-secondary text-center my-4 underline underline-offset-2">
           My Profile
         </h2>
       </div>
       <div className="flex justify-center">
-        <div className="card max-w-4xl bg-base-100 shadow-xl">
+        <div className="card w-80 max-w-4xl bg-base-100 shadow-xl">
           <figure>
             <div className="avatar">
               <div className="w-48 rounded-full">
-                <img src={user?.photoURL} alt="avatar" />
+                <img src={user?.photoURL || "https://i.ibb.co/YcyKMGW/user.png"} alt="avatar" />
               </div>
             </div>
           </figure>
           <div className="card-body">
-            <h2 className="card-title">{user?.displayName}</h2>
-            <p>Email: {user?.email}</p>
-            <div className="card-actions justify-start">
+            <div className="my-2">
+              <h2 className="text-xl font-bold text-slate-800">
+                {user?.displayName}
+              </h2>
+              <p className="text-md font-bold text-slate-800">
+                Email: {user?.email}
+              </p>
+            </div>
+            {profileInfo?.education && <div className="card-actions justify-start">
               <div>
-                <p className="text-slate-600 font-semibold text-md">
+                <h3 className="text-primary underline underline-offset-2 font-semibold text-sm">Other Information</h3>
+                <p className="text-slate-600 font-semibold text-md mt-1">
                   <b>Education: </b>
-                  {profileInfo.education}{" "}
+                  {profileInfo?.education}{" "}
                 </p>
                 <p className="text-slate-600 font-semibold text-md">
                   <b>Location: </b>
-                  {profileInfo.location}{" "}
+                  {profileInfo?.location}{" "}
                 </p>
                 <p className="text-slate-600 font-semibold text-md">
                   <b>LinkedIn: </b>
-                  {profileInfo.linkedin}{" "}
+                  {profileInfo?.linkedin}{" "}
                 </p>
                 <p className="text-slate-600 font-semibold text-md">
                   <b>Phone: </b>
-                  {profileInfo.phone}{" "}
+                  {profileInfo?.phone}{" "}
                 </p>
               </div>
-            </div>
+            </div>}
           </div>
         </div>
       </div>
@@ -159,7 +166,7 @@ const MyProfile = () => {
                     <input
                       type="submit"
                       className="btn btn-primary"
-                      value="Add a Review"
+                      value="Update Profile"
                     />
                   </div>
                 </form>

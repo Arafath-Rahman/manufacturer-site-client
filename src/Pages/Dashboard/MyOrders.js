@@ -5,7 +5,6 @@ import { useQuery } from "react-query";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../firebase.init";
-import Loading from "../Shared/Loading";
 import DeleteModal from "./DeleteModal";
 
 const MyOrders = () => {
@@ -15,6 +14,26 @@ const MyOrders = () => {
 
   //deleteing an order with modal
   const [deleteModal, setDeleteModal] = useState(false);
+
+  const {
+    data: orders,
+    isLoading,
+    refetch,
+  } = useQuery("userOrders", () =>
+    fetch(`http://localhost:5000/order?userEmail=${user.email}`, {
+      method: "GET",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }).then((res) => {
+      if (res.status === 401 || res.status === 403) {
+        signOut(auth);
+        localStorage.removeItem("accessToken");
+        navigate("/");
+      }
+      return res.json();
+    })
+  );
 
   const handleDelete = (orderId) => {
     fetch(`http://localhost:5000/order/${orderId}`, {
@@ -32,41 +51,18 @@ const MyOrders = () => {
       });
   };
 
- 
+  const handleCancel = (id) => {
+    setDeleteModal(true);
+  };
 
+  // if (loading || isLoading) {
+  //   return <Loading />;
+  // }
   //------------------------------
   //------------------------------
-  const {
-    data: orders,
-    isLoading,
-    refetch,
-  } = useQuery("userOrders", () =>
-  fetch(`http://localhost:5000/order?userEmail=${user.email}`, {
-    method: "GET",
-    headers: {
-      authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-    },
-  })
-  .then((res) => {
-    if (res.status === 401 || res.status === 403) {
-      signOut(auth);
-      localStorage.removeItem("accessToken");
-      navigate("/");
-    }
-    return res.json();
-  }));
-
-  if (loading || isLoading) {
-    return <Loading />;
-  }
-  //------------------------------
-  //------------------------------
-  
-
 
   return (
     <div>
-      <h2>My orders: {orders?.length}</h2>
       <div>
         <div className="overflow-x-auto">
           <table className="table w-full">
@@ -99,20 +95,28 @@ const MyOrders = () => {
                         </Link>
                         <label
                           htmlFor="delete-order-modal"
-                          onClick={() => setDeleteModal(true)}
+                          onClick={() => handleCancel(order._id)}
                           className="btn btn-xs btn-error ml-1"
                         >
                           Cancel
                         </label>
+                        {deleteModal && (
+                          <DeleteModal
+                            handleDelete={handleDelete}
+                            order={order}
+                            setDeleteModal={setDeleteModal}
+                            refetch={refetch}
+                          />
+                        )}
                       </div>
                     )}
-                    {
-                      deleteModal && <DeleteModal handleDelete={handleDelete} order={order} setDeleteModal={setDeleteModal} />
-                    }
-                    {order.totalPrice && order.paid && (
+
+                    {order.paid && (
                       <div>
                         <p className="font-bold text-green-500">Paid</p>
-                        <p className="font-bold text-orange-500">Transaction ID: {order.transactionId}</p>
+                        <p className="font-bold text-orange-500">
+                          Transaction ID: {order.transactionId}
+                        </p>
                       </div>
                     )}
                   </td>
