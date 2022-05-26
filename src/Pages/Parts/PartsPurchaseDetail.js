@@ -35,6 +35,7 @@ const PartsPurchaseDetail = () => {
       totalPrice: totalPrice,
       paid: false,
       transactionId: "none",
+      status: "unpaid",
     };
 
     //adding data to orderCollection

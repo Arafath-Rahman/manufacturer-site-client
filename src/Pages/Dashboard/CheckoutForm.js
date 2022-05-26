@@ -51,7 +51,8 @@ const CheckoutForm = ({order}) => {
       toast.success("Payment Successful");  
       
       const payment = {
-        paid: true, 
+        paid: true,
+        status: "pending", 
         transactionId: paymentIntent.id,
       }
 
