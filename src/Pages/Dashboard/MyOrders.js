@@ -91,7 +91,7 @@ const MyOrders = () => {
 
   return (
     <div>
-      <h2>My orders: {orders.length}</h2>
+      <h2>My orders: {orders?.length}</h2>
       <div>
         <div className="overflow-x-auto">
           <table className="table w-full">
@@ -117,7 +117,7 @@ const MyOrders = () => {
                     {order.totalPrice && !order.paid && (
                       <div>
                         <Link
-                          to={`/dashboard/payment/${order._id}`}
+                          to={`/dashboard/order/${order._id}`}
                           className="btn btn-xs btn-success"
                         >
                           Pay
@@ -134,7 +134,7 @@ const MyOrders = () => {
                     {
                       deleteModal && <DeleteModal handleDelete={handleDelete} order={order} setDeleteModal={setDeleteModal} />
                     }
-                    {order.price && order.paid && (
+                    {order.totalPrice && order.paid && (
                       <div>
                         <p className="font-bold text-green-500">Paid</p>
                         <p>Transaction ID: {order.transactionId}</p>

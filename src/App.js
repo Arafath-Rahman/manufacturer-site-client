@@ -7,6 +7,7 @@ import AddReview from "./Pages/Dashboard/AddReview";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import MyOrders from "./Pages/Dashboard/MyOrders";
 import MyProfile from "./Pages/Dashboard/MyProfile";
+import Payment from "./Pages/Dashboard/Payment";
 import Home from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
 import RequireAuth from "./Pages/Login/RequireAuth";
@@ -41,10 +42,18 @@ function App() {
           <Route path="/reviews" element={<AllReviews />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/dashboard" element={<Dashboard />}>
+          <Route
+            path="/dashboard"
+            element={
+              <RequireAuth>
+                <Dashboard />
+              </RequireAuth>
+            }
+          >
             <Route index element={<MyOrders />} />
             <Route path="addReview" element={<AddReview />} />
             <Route path="profile" element={<MyProfile />} />
+            <Route path="order/:orderId" element={<Payment />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
