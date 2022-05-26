@@ -13,9 +13,9 @@ const DeleteModal = ({ handleDelete, order, setDeleteModal }) => {
           <div className="card">
             <div className="card-body items-center text-center">
               <h2 className="card-title text-red-500 font-bold">
-                Order Cancel Confirmation
+                Cancel/Delete Confirmation
               </h2>
-              <p>Are you sure you want to Cancel the <br /> order of {`${order.partName}`}?</p>
+              <p>Are you sure you want to Cancel/Delete?</p>
             </div>
           </div>
           <div className="modal-action">
