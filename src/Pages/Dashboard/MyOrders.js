@@ -103,7 +103,7 @@ const MyOrders = () => {
                         {deleteModal && (
                           <DeleteModal
                             handleDelete={handleDelete}
-                            order={order}
+                            id={order._id}
                             setDeleteModal={setDeleteModal}
                             refetch={refetch}
                           />

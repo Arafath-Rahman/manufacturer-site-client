@@ -1,6 +1,6 @@
 import React from "react";
 
-const DeleteModal = ({ handleDelete, order, setDeleteModal }) => {
+const DeleteModal = ({ handleDelete, id, setDeleteModal, refetch }) => {
   return (
     <div>
       <input
@@ -21,7 +21,8 @@ const DeleteModal = ({ handleDelete, order, setDeleteModal }) => {
           <div className="modal-action">
             <label
               onClick={() => {
-                handleDelete(order._id);
+                handleDelete(id);
+                refetch();
                 setDeleteModal(false);
               }}
               htmlFor="delete-order-modal"

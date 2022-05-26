@@ -172,8 +172,8 @@ const Navbar = () => {
                 className="mt-48 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
               >
                 <li>
-                  <Link to="" className="justify-between">
-                    Profile
+                  <Link to="portfolio" className="justify-between">
+                    My Portfolio
                   </Link>
                 </li>
                 <li>

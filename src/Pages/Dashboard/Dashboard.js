@@ -8,10 +8,6 @@ const Dashboard = () => {
   const [user] = useAuthState(auth);
   const [admin] = useAdmin(user);
 
-  if (admin) {
-    console.log(admin);
-  }
-
   return (
     <div>
       <div className="drawer drawer-mobile">

@@ -17,6 +17,7 @@ import Login from "./Pages/Login/Login";
 import RequireAdmin from "./Pages/Login/RequireAdmin";
 import RequireAuth from "./Pages/Login/RequireAuth";
 import Signup from "./Pages/Login/Signup";
+import MyPortfolio from "./Pages/MyPortfolio/MyPortfolio";
 import AllParts from "./Pages/Parts/AllParts";
 import PartsPurchaseDetail from "./Pages/Parts/PartsPurchaseDetail";
 import AllReviews from "./Pages/Reviews/AllReviews";
@@ -47,6 +48,7 @@ function App() {
           <Route path="/reviews" element={<AllReviews />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/portfolio" element={<MyPortfolio />} />
           <Route
             path="/dashboard"
             element={
