@@ -1,6 +1,7 @@
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
+import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../firebase.init";
@@ -16,6 +17,19 @@ const MyProfile = () => {
     reset,
   } = useForm();
 
+  // get profile data
+  const {
+    data: profileInfo,
+    isLoading,
+    refetch,
+  } = useQuery(["profile", user?.email], (req, res) =>
+    fetch(`http://localhost:5000/profile/${user?.email}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }).then(res => res.json())
+  );
+
   //form submit handler
   const onSubmit = async (data) => {
     const { education, location, linkedin, phone } = data;
@@ -27,24 +41,25 @@ const MyProfile = () => {
       education: education,
       location: location,
       linkedin: linkedin,
-      phone: phone
+      phone: phone,
     };
-    
+
     fetch(`http://localhost:5000/profile/${email}`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
         "content-type": "application/json",
-        authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
-      body: JSON.stringify(profile)
+      body: JSON.stringify(profile),
     })
-    .then(res => res.json())
-    .then(data => {
-      console.log(data);
-      if(data){
-        toast.success("Profile Updated successfully.")
-      }
-    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data) {
+          toast.success("Profile Updated successfully.");
+          refetch();
+        }
+      });
   };
 
   return (
@@ -66,9 +81,24 @@ const MyProfile = () => {
           <div className="card-body">
             <h2 className="card-title">{user?.displayName}</h2>
             <p>Email: {user?.email}</p>
-            <div className="card-actions justify-center">
+            <div className="card-actions justify-start">
               <div>
-                <p>Education: </p>
+                <p className="text-slate-600 font-semibold text-md">
+                  <b>Education: </b>
+                  {profileInfo.education}{" "}
+                </p>
+                <p className="text-slate-600 font-semibold text-md">
+                  <b>Location: </b>
+                  {profileInfo.location}{" "}
+                </p>
+                <p className="text-slate-600 font-semibold text-md">
+                  <b>LinkedIn: </b>
+                  {profileInfo.linkedin}{" "}
+                </p>
+                <p className="text-slate-600 font-semibold text-md">
+                  <b>Phone: </b>
+                  {profileInfo.phone}{" "}
+                </p>
               </div>
             </div>
           </div>
@@ -90,6 +120,7 @@ const MyProfile = () => {
                     <input
                       type="text"
                       placeholder="Current Education Level"
+                      defaultValue={profileInfo?.education}
                       className="input input-bordered"
                       {...register("education")}
                     />
@@ -99,6 +130,7 @@ const MyProfile = () => {
                     <input
                       type="text"
                       placeholder="City/District"
+                      defaultValue={profileInfo?.location}
                       className="input input-bordered"
                       {...register("location")}
                     />
@@ -108,6 +140,7 @@ const MyProfile = () => {
                     <input
                       type="text"
                       placeholder="LinkedIn Profile Link"
+                      defaultValue={profileInfo?.linkedin}
                       className="input input-bordered"
                       {...register("linkedin")}
                     />
@@ -117,6 +150,7 @@ const MyProfile = () => {
                     <input
                       type="text"
                       placeholder="Your Phone"
+                      defaultValue={profileInfo?.phone}
                       className="input input-bordered"
                       {...register("phone")}
                     />
