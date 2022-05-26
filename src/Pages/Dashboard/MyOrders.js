@@ -137,7 +137,7 @@ const MyOrders = () => {
                     {order.totalPrice && order.paid && (
                       <div>
                         <p className="font-bold text-green-500">Paid</p>
-                        <p>Transaction ID: {order.transactionId}</p>
+                        <p className="font-bold text-orange-500">Transaction ID: {order.transactionId}</p>
                       </div>
                     )}
                   </td>
