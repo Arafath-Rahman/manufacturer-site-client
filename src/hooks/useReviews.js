@@ -11,7 +11,7 @@ const useReviews = () => {
       }
     })
     .then(res => res.json())
-    .then(data => setReviews(data))
+    .then(data => setReviews(data.reverse()))
   }, []);
 
   return [reviews, setReviews];

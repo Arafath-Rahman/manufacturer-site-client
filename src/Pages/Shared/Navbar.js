@@ -193,12 +193,12 @@ const Navbar = () => {
             </div>
           )}
           {/* sidebar btn */}
-          <label
+          {user && <label
             htmlFor="dashboard-drawer"
             className="btn btn-sm btn-outline btn-primary p-0 btn-drawer lg:hidden"
           >
             <BiMenuAltRight className="w-8 h-8" />{/* <img src={sidebar} alt="sidebar" /> */}
-          </label>
+          </label>}
         </div>
       </div>
     </div>

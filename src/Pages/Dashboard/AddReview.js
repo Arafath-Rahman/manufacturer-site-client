@@ -1,8 +1,15 @@
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { BiErrorCircle } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import auth from "../../firebase.init";
 
 const AddReview = () => {
+  const [user] = useAuthState(auth);
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -12,7 +19,32 @@ const AddReview = () => {
 
   //form submit handler
   const onSubmit = async (data) => {
-    console.log(data);
+    const {title, description, rating, location} = data;
+    const review = {
+      name: user.displayName,
+      image: user.photoURL || "https://api.lorem.space/image/face?hash=3374",
+      title: title,
+      description: description,
+      rating: rating,
+      location: location
+    }
+
+    fetch("http://localhost:5000/review", {
+      method: 'POST',
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem('accessToken')}`
+      },
+      body: JSON.stringify(review)
+    })
+    .then(res => res.json())
+    .then(data => {
+      if(data.success){
+        toast.success("Review Added successfully");
+        navigate("/reviews");
+      }
+    })
+
     reset();
   };
   return (
