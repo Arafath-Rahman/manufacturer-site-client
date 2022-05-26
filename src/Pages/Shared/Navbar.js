@@ -176,9 +176,6 @@ const Navbar = () => {
                     My Portfolio
                   </Link>
                 </li>
-                <li>
-                  <Link to="">Settings</Link>
-                </li>
                 {user?.email && (
                   <li>
                     <button

@@ -11,7 +11,7 @@ const useParts = () => {
       }
     })
     .then(res => res.json())
-    .then(data => setParts(data))
+    .then(data => setParts(data.reverse()))
   }, []);
 
   return [parts, setParts];
