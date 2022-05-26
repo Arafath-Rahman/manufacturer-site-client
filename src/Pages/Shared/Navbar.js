@@ -9,7 +9,7 @@ import useUserInfo from "../../hooks/useUserInfo";
 import Loading from "./Loading";
 
 const Navbar = () => {
-  const menuItems = ["Home", "Parts", "Reviews"];
+  const menuItems = ["Home", "Parts", "Reviews", "Blogs"];
   const [user, loading] = useAuthState(auth);
   const [userName] = useContext(NameContext);
   const [userInfo] = useUserInfo(user?.email);

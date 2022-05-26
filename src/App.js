@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
+import Blogs from "./Pages/Blogs/Blogs";
 import AddParts from "./Pages/Dashboard/AddParts";
 import AddReview from "./Pages/Dashboard/AddReview";
 import Dashboard from "./Pages/Dashboard/Dashboard";
@@ -46,6 +47,7 @@ function App() {
             }
           />
           <Route path="/reviews" element={<AllReviews />} />
+          <Route path="/blogs" element={<Blogs />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/portfolio" element={<MyPortfolio />} />
