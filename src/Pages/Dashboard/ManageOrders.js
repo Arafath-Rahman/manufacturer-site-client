@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useQuery } from "react-query";
 import { toast } from "react-toastify";
 import auth from "../../firebase.init";
 import Loading from "../Shared/Loading";
+import DeleteModal from "./DeleteModal";
 
 const ManageOrders = () => {
   const [user] = useAuthState(auth);
-  let count = 0;
+  const [deleteModal, setDeleteModal] = useState(false);
 
   const {
     data: orders,
@@ -22,13 +23,12 @@ const ManageOrders = () => {
     }).then((res) => res.json())
   );
 
-
-
   if (isLoading) {
     return <Loading />;
   }
 
   const handleChange = (event, order) => {
+    refetch();
     if (event.target.value === "shipped" && order.status === "pending") {
       const update = {
         status: "shipped",
@@ -49,13 +49,27 @@ const ManageOrders = () => {
             toast.success("Status Updated successfully.");
           }
         });
-    }
-    else if(event.target.value === "shipped" && order.status === "unpaid"){
+    } else if (event.target.value === "shipped" && order.status === "unpaid") {
       toast.error("Unpaid order can not be shipped.");
     }
   };
 
-
+  //handle delete order
+  const handleDelete = (orderId) => {
+    fetch(`http://localhost:5000/order/${orderId}`, {
+      method: "DELETE",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.deletedCount) {
+          toast.success(`Order Cancelled successfully`);
+          refetch();
+        }
+      });
+  };
 
   return (
     <div>
@@ -68,7 +82,9 @@ const ManageOrders = () => {
                 <th>User</th>
                 <th>Part Name</th>
                 <th>Quantity</th>
+                <th>Total Price</th>
                 <th>Status</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -78,11 +94,20 @@ const ManageOrders = () => {
                   <td>{order?.userEmail}</td>
                   <td>{order?.partName}</td>
                   <td>{order?.orderQuantity}</td>
+                  <td>{order?.totalPrice}</td>
                   <td>
                     <div>
                       <select
-                        defaultValue={order?.status === "unpaid" ? "unpaid" : `${order?.status === "pending" ? "pending" : "shipped"}` }
-                        className="select select-bordered select-sm w-full max-w-xs"
+                        defaultValue={
+                          order?.status === "unpaid"
+                            ? "unpaid"
+                            : `${
+                                order?.status === "pending"
+                                  ? "pending"
+                                  : "shipped"
+                              }`
+                        }
+                        className="select select-bordered select-sm max-w-xs"
                         onChange={(e) => handleChange(e, order)}
                       >
                         <option value="unpaid" className="text-red-500">
@@ -96,6 +121,27 @@ const ManageOrders = () => {
                         </option>
                       </select>
                     </div>
+                  </td>
+                  <td>
+                    {order?.status === "unpaid" && (
+                      <>
+                        <label
+                          htmlFor="delete-order-modal"
+                          onClick={() => setDeleteModal(true)}
+                          className="btn btn-xs btn-error ml-1"
+                        >
+                          Cancel
+                        </label>
+                        {deleteModal && (
+                          <DeleteModal
+                            handleDelete={handleDelete}
+                            order={order}
+                            setDeleteModal={setDeleteModal}
+                            refetch={refetch}
+                          />
+                        )}
+                      </>
+                    )}
                   </td>
                 </tr>
               ))}
