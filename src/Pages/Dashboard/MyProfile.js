@@ -2,6 +2,7 @@ import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import auth from "../../firebase.init";
 
 const MyProfile = () => {
@@ -17,13 +18,39 @@ const MyProfile = () => {
 
   //form submit handler
   const onSubmit = async (data) => {
-    const { title, description, rating, location } = data;
+    const { education, location, linkedin, phone } = data;
+    const email = user?.email;
+
+    const profile = {
+      name: user.name,
+      email: user.email,
+      education: education,
+      location: location,
+      linkedin: linkedin,
+      phone: phone
+    };
+    
+    fetch(`http://localhost:5000/profile/${email}`, {
+      method: 'PUT',
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem('accessToken')}`
+      },
+      body: JSON.stringify(profile)
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+      if(data){
+        toast.success("Profile Updated successfully.")
+      }
+    })
   };
 
   return (
     <div>
       <div className="py-5">
-        <h2 className="text-2xl font-bold text-prirmary text-center my-4">
+        <h2 className="text-2xl font-bold text-primary text-center my-4">
           My Profile
         </h2>
       </div>
@@ -73,7 +100,7 @@ const MyProfile = () => {
                       type="text"
                       placeholder="City/District"
                       className="input input-bordered"
-                      {...register("city")}
+                      {...register("location")}
                     />
                     <label className="label">
                       <span className="label-text">LinkedIn</span>

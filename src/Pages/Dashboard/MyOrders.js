@@ -32,31 +32,7 @@ const MyOrders = () => {
       });
   };
 
-  //getting all orders of an user by email
-  // useEffect(() => {
-  //   if (user) {
-  //     fetch(`http://localhost:5000/order?userEmail=${user.email}`, {
-  //       method: "GET",
-  //       headers: {
-  //         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-  //       },
-  //     })
-  //       .then((res) => {
-  //         console.log("res-->", res);
-  //         if (res.status === 401 || res.status === 403) {
-  //           signOut(auth);
-  //           localStorage.removeItem("accessToken");
-  //           navigate("/");
-  //         }
-  //         return res.json();
-  //       })
-  //   }
-  // }, [user, navigate]);
-
-  // if (loading || orders.length === 0) {
-  //   return <Loading />;
-  // }
-
+ 
 
   //------------------------------
   //------------------------------
@@ -72,7 +48,6 @@ const MyOrders = () => {
     },
   })
   .then((res) => {
-    console.log("res-->", res);
     if (res.status === 401 || res.status === 403) {
       signOut(auth);
       localStorage.removeItem("accessToken");
