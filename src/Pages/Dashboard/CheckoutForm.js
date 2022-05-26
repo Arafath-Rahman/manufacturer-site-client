@@ -7,12 +7,12 @@ const CheckoutForm = ({order}) => {
   const [cardError, setCardError] = useState('');
   const [success, setSuccess] = useState('');
   const [txnId, setTxnId] = useState('');
-  // const [isLoading, setIsLoading] = useState(false);
   const [clientSecret, setClientSecret] = useState('');
   const {_id, partName, totalPrice, userName, userEmail} = order;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     if (!stripe || !elements) {
       return;
     }
@@ -26,6 +26,7 @@ const CheckoutForm = ({order}) => {
       type: "card",
       card,
     });
+    console.log(paymentMethod);
     setSuccess("");
     setCardError(error?.message || "");
 
@@ -43,14 +44,16 @@ const CheckoutForm = ({order}) => {
       },
     );
 
+    console.log(paymentIntent);
+
     if(intentError){
       setSuccess("");
       setCardError(intentError.message);
     }
     else{
       setTxnId(paymentIntent.id);
-      setSuccess(`Congrats! Your payment for ${partName} appointment of $ ${totalPrice} is completed.`);  
-
+      setSuccess(`Congrats! Your payment for ${partName} of <b>$${totalPrice} is completed.`);  
+      
       const payment = { 
         transactionId: paymentIntent.id,
       }
@@ -67,10 +70,9 @@ const CheckoutForm = ({order}) => {
       .then(data => {
         console.log(data);
       })
-
-      console.log('-->', paymentIntent);
     }
   };
+
 
   useEffect( ()=> {
     fetch('http://localhost:5000/create-payment-intent', {
@@ -84,6 +86,8 @@ const CheckoutForm = ({order}) => {
     .then(res => res.json())
     .then(data => setClientSecret(data.clientSecret))
   }, [totalPrice])
+
+
 
 
   return (
@@ -110,9 +114,10 @@ const CheckoutForm = ({order}) => {
       {
         cardError && <p className="text-red-500 text-sm">{cardError}</p>
       }
+
       {
         success && <div>
-          <p className="text-green-500 text-sm">{success}</p>
+          <p className="text-green-500 text-sm font-bold">{success}</p>
           <p>Your transaction id: <span className="text-orange-500 font-bold">{txnId}</span></p>
         </div>
       }

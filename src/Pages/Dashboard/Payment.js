@@ -41,9 +41,9 @@ const Payment = () => {
             <span className="text-orange-500">{order.partName}</span>
           </h2>
           <p>
-            You have an unpaid order of {order.partName} <br />
-            Quantity: {order.orderQuantity} <br />
-            Total Payable Amount is: $ {order.totalPrice}
+            You have an unpaid order of <b>{order.partName}</b> <br />
+            Quantity: <b>{order.orderQuantity}</b> <br />
+            Total Payable Amount is: <b>${order.totalPrice}</b>
           </p>
         </div>
       </div>
