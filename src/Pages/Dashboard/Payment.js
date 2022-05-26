@@ -13,7 +13,7 @@ const Payment = () => {
 
   const url = `http://localhost:5000/order/${orderId}`;
 
-  const { data: order, isLoading, refetch } = useQuery(
+  const { data: order, isLoading } = useQuery(
     ["order", orderId],
     () =>
       fetch(url, {

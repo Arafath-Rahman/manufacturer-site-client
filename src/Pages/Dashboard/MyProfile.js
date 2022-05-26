@@ -54,7 +54,6 @@ const MyProfile = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data) {
           toast.success("Profile Updated successfully.");
           refetch();

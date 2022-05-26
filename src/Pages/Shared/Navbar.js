@@ -193,7 +193,7 @@ const Navbar = () => {
             </div>
           )}
           {/* sidebar btn */}
-          {user && <label
+          {user?.email && <label
             htmlFor="dashboard-drawer"
             className="btn btn-sm btn-outline btn-primary p-0 btn-drawer lg:hidden"
           >

@@ -1,10 +1,8 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const CheckoutForm = ({order}) => {
-  const navigate = useNavigate();
   const stripe = useStripe();
   const elements = useElements();
   const [cardError, setCardError] = useState('');
@@ -26,7 +24,6 @@ const CheckoutForm = ({order}) => {
       type: "card",
       card,
     });
-    console.log(paymentMethod);
     setSuccess("");
     setCardError(error?.message || "");
 
@@ -69,7 +66,7 @@ const CheckoutForm = ({order}) => {
       .then(res => res.json())
       .then(data => {
         if(data){
-          console.log(data);
+          // console.log(data);
         }
       })
     }
