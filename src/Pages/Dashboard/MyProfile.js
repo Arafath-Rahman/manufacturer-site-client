@@ -2,19 +2,16 @@ import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { useQuery } from "react-query";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../firebase.init";
+import Loading from "../Shared/Loading";
 
 const MyProfile = () => {
   const [user] = useAuthState(auth);
-  const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
-    reset,
   } = useForm();
 
   // get profile data
@@ -61,11 +58,15 @@ const MyProfile = () => {
       });
   };
 
+  if(isLoading){
+    return <Loading />;
+  }
+
   return (
     <div>
       <div className="py-5">
         <h2 className="text-2xl font-bold text-secondary text-center my-4 underline underline-offset-2">
-          My Profile
+          MY PROFILE
         </h2>
       </div>
       <div className="flex justify-center">

@@ -25,17 +25,16 @@ const MakeAdmin = () => {
       },
     })
       .then((res) => {
-        if (res.status === 403){
-          toast.error('Can not make admin if you are not an admin');
+        if (res.status === 403) {
+          toast.error("Can not make admin if you are not an admin");
         }
         return res.json();
       })
       .then((data) => {
-        if(data.modifiedCount > 0){
+        if (data.modifiedCount > 0) {
           toast.success(`Successfully made ${user.email} an admin`);
           refetch();
         }
-        
       });
   };
 
@@ -45,7 +44,11 @@ const MakeAdmin = () => {
 
   return (
     <div>
-      <h2>All Users: {users?.length}</h2>
+      <div className="py-3">
+        <h2 className="text-2xl font-bold text-secondary text-center my-4 underline underline-offset-2">
+          MAKE ADMIN
+        </h2>
+      </div>
       <div>
         <div className="overflow-x-auto">
           <table className="table w-full">

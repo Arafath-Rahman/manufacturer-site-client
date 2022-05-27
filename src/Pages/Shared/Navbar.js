@@ -9,7 +9,7 @@ import useUserInfo from "../../hooks/useUserInfo";
 import Loading from "./Loading";
 
 const Navbar = () => {
-  const menuItems = ["Home", "Parts", "Reviews", "Blogs"];
+  const menuItems = ["Home", "Parts", "Reviews", "Blogs", "Portfolio"];
   const [user, loading] = useAuthState(auth);
   const [userName] = useContext(NameContext);
   const [userInfo] = useUserInfo(user?.email);
@@ -92,7 +92,7 @@ const Navbar = () => {
             to="/"
             className="uppercase text-sm md:text-xl text-slate-800 font-extrabold hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-secondary hover:to-primary"
           >
-            Robotics Parts Store
+            Robotics Parts Manufacturer
           </Link>
         </div>
 
@@ -169,13 +169,8 @@ const Navbar = () => {
               )}
               <ul
                 tabIndex="0"
-                className="mt-48 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
+                className="mt-32 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
               >
-                <li>
-                  <Link to="portfolio" className="justify-between">
-                    My Portfolio
-                  </Link>
-                </li>
                 {user?.email && (
                   <li>
                     <button

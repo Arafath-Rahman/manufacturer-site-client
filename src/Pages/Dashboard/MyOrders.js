@@ -12,7 +12,7 @@ const MyOrders = () => {
   // const [orders, setOrders] = useState([]);
   const navigate = useNavigate();
 
-  //deleteing an order with modal
+  //deleting an order with modal
   const [deleteModal, setDeleteModal] = useState(false);
 
   const {
@@ -35,14 +35,17 @@ const MyOrders = () => {
     })
   );
 
-
   if (loading || isLoading) {
     return <Loading />;
   }
 
-
   return (
     <div>
+      <div className="py-5">
+        <h2 className="text-2xl font-bold text-secondary text-center my-4 underline underline-offset-2">
+          MY ORDERS
+        </h2>
+      </div>
       <div>
         <div className="overflow-x-auto">
           <table className="table w-full">

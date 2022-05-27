@@ -6,7 +6,7 @@ const AroundWorld = () => {
     <div className="mb-16">
       <div>
         <h2
-          className="text-center text-4xl font-bold mb-12"
+          className="text-center text-4xl font-extrabold mb-12"
         >
           WE HAVE BEEN AROUND THE WORLD
         </h2>

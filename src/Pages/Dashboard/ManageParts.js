@@ -23,7 +23,11 @@ const ManageParts = () => {
 
   return (
     <div>
-      parts: {parts?.length}
+      <div className="py-5">
+        <h2 className="text-2xl font-bold text-secondary text-center my-4 underline underline-offset-2">
+          MY PROFILE
+        </h2>
+      </div>
       <div>
         <div className="overflow-x-auto">
           <table className="table w-full">

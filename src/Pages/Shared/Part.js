@@ -1,8 +1,13 @@
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { ImStarFull } from "react-icons/im";
 import { useNavigate } from "react-router-dom";
+import auth from "../../firebase.init";
+import useAdmin from "../../hooks/useAdmin";
 
 const Part = ({ part }) => {
+  const [user] = useAuthState(auth);
+  const [admin] = useAdmin(user);
   const { _id, name, description, price, image, stock, moq, review } = part;
   const navigate = useNavigate();
 
@@ -40,7 +45,7 @@ const Part = ({ part }) => {
           </div>
         </div>
         <div className="card-actions justify-center mt-3">
-          <button onClick={()=> navigate(`/parts/${_id}`)} className="btn btn-secondary btn-outline w-96 max-w-md rounded-2xl">Place Order</button>
+          <button disabled={admin} onClick={()=> navigate(`/parts/${_id}`)} className="btn btn-secondary btn-outline w-96 max-w-md rounded-2xl">Place Order</button>
         </div>
       </div>
     </div>

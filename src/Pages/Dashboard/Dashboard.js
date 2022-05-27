@@ -27,31 +27,31 @@ const Dashboard = () => {
           <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
           <ul className="menu p-4 overflow-y-auto w-56 bg-base-100 text-base-content">
             {/* <!-- Sidebar content here --> */}
-            <li>
+            <li className="text-lg font-bold text-secondary">
               <Link to="/dashboard">My Profile</Link>
             </li>
             { !admin &&
               <>
-                <li>
+                <li className="text-lg font-bold text-secondary">
                   <Link to="orders">My Orders</Link>
                 </li>
-                <li>
+                <li className="text-lg font-bold text-secondary">
                   <Link to="addReview">Add a Review</Link>
                 </li>
               </>
             }
             {admin && (
               <>
-                <li>
+                <li className="text-lg font-bold text-secondary">
                   <Link to="makeAdmin">Make Admin</Link>
                 </li>
-                <li>
+                <li className="text-lg font-bold text-secondary">
                   <Link to="addParts">Add Parts</Link>
                 </li>
-                <li>
+                <li className="text-lg font-bold text-secondary">
                   <Link to="manageParts">Manage Parts</Link>
                 </li>
-                <li>
+                <li className="text-lg font-bold text-secondary">
                   <Link to="manageOrders">Manage All Orders</Link>
                 </li>
               </>

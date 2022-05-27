@@ -91,8 +91,6 @@ const CheckoutForm = ({order}) => {
   }, [totalPrice])
 
 
-
-
   return (
     <form onSubmit={handleSubmit}>
       <CardElement
