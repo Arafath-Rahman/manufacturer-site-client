@@ -39,7 +39,7 @@ const PartsPurchaseDetail = () => {
     };
 
     //adding data to orderCollection
-    fetch("http://localhost:5000/order", {
+    fetch("https://robotics-parts-store.herokuapp.com/order", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -61,7 +61,7 @@ const PartsPurchaseDetail = () => {
 
   //getting part data
   useEffect(() => {
-    fetch(`http://localhost:5000/parts/${partId}`, {
+    fetch(`https://robotics-parts-store.herokuapp.com/parts/${partId}`, {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,

@@ -15,7 +15,7 @@ const ManageOrders = () => {
     isLoading,
     refetch,
   } = useQuery("allOrders", () =>
-    fetch("http://localhost:5000/orders", {
+    fetch("https://robotics-parts-store.herokuapp.com/orders", {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -34,7 +34,7 @@ const ManageOrders = () => {
         status: "shipped",
       };
 
-      fetch(`http://localhost:5000/order/${order._id}`, {
+      fetch(`https://robotics-parts-store.herokuapp.com/order/${order._id}`, {
         method: "PATCH",
         headers: {
           "content-type": "application/json",
@@ -56,7 +56,7 @@ const ManageOrders = () => {
 
   //handle delete order
   const handleDelete = (orderId) => {
-    fetch(`http://localhost:5000/order/${orderId}`, {
+    fetch(`https://robotics-parts-store.herokuapp.com/order/${orderId}`, {
       method: "DELETE",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,

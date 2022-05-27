@@ -11,7 +11,7 @@ const stripePromise = loadStripe('pk_test_51L1uMDFxeGOLmT8G3tnfw2Wuo5d10cvWrbxrL
 const Payment = () => {
   const { orderId } = useParams();
 
-  const url = `http://localhost:5000/order/${orderId}`;
+  const url = `https://robotics-parts-store.herokuapp.com/order/${orderId}`;
 
   const { data: order, isLoading } = useQuery(
     ["order", orderId],
