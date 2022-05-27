@@ -29,7 +29,7 @@ const AddParts = () => {
       review: reviewNumber,
     }
 
-    fetch("http://localhost:5000/part", {
+    fetch("https://robotics-parts-store.herokuapp.com/part", {
       method: 'POST',
       headers: {
         "content-type": "application/json",

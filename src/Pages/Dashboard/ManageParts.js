@@ -12,7 +12,7 @@ const ManageParts = () => {
     isLoading,
     refetch,
   } = useQuery("partsData", () =>
-    fetch("http://localhost:5000/parts", {
+    fetch("https://robotics-parts-store.herokuapp.com/parts", {
       method: "GET",
     }).then((res) => res.json())
   );

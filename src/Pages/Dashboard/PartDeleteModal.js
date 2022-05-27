@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 
 const PartDeleteModal = ({ deletingPart, setDeletingPart, refetch }) => {
   const handleDelete = (id) => {
-    fetch(`http://localhost:5000/part/${deletingPart._id}`, {
+    fetch(`https://robotics-parts-store.herokuapp.com/part/${deletingPart._id}`, {
       method: 'DELETE',
       headers: {
         authorization: `Bearer ${localStorage.getItem('accessToken')}`
