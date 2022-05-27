@@ -4,7 +4,7 @@ const useUserInfo = (email) => {
   const [userInfo, setUserInfo] = useState(null);
 
   useEffect( ()=> {
-      fetch(`https://robotics-parts-store.herokuapp.com/user/${email}`, {
+      fetch(`http://localhost:5000/user/${email}`, {
         method: 'GET',
         headers: {
           authorization: `Bearer ${localStorage.getItem('accessToken')}`,

@@ -13,7 +13,7 @@ const HomeReviews = () => {
       <div className='flex justify-center'>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
         {
-          reviews.slice(0, 3).map((singleReview, i) => <Review key={i} singleReview={singleReview}/>)
+          reviews?.slice(0, 3).map((singleReview, i) => <Review key={i} singleReview={singleReview}/>)
         }
         </div>
       </div>

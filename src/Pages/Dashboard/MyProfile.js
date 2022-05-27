@@ -23,7 +23,7 @@ const MyProfile = () => {
     isLoading,
     refetch,
   } = useQuery(["profile", user?.email], (req, res) =>
-    fetch(`https://robotics-parts-store.herokuapp.com/profile/${user?.email}`, {
+    fetch(`http://localhost:5000/profile/${user?.email}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
@@ -44,7 +44,7 @@ const MyProfile = () => {
       phone: phone,
     };
 
-    fetch(`https://robotics-parts-store.herokuapp.com/profile/${email}`, {
+    fetch(`http://localhost:5000/profile/${email}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

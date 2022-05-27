@@ -20,7 +20,7 @@ const MyOrders = () => {
     isLoading,
     refetch,
   } = useQuery("userOrders", () =>
-    fetch(`https://robotics-parts-store.herokuapp.com/order?userEmail=${user.email}`, {
+    fetch(`http://localhost:5000/order?userEmail=${user.email}`, {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -36,7 +36,7 @@ const MyOrders = () => {
   );
 
   const handleDelete = (orderId) => {
-    fetch(`https://robotics-parts-store.herokuapp.com/order/${orderId}`, {
+    fetch(`http://localhost:5000/order/${orderId}`, {
       method: "DELETE",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,

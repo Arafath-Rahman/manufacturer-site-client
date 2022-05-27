@@ -9,7 +9,7 @@ const MakeAdmin = () => {
     isLoading,
     refetch,
   } = useQuery("users", () =>
-    fetch("https://robotics-parts-store.herokuapp.com/user", {
+    fetch("http://localhost:5000/user", {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -18,7 +18,7 @@ const MakeAdmin = () => {
   );
 
   const makeAdmin = (user) => {
-    fetch(`https://robotics-parts-store.herokuapp.com/user/admin/${user.email}`, {
+    fetch(`http://localhost:5000/user/admin/${user.email}`, {
       method: "PUT",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
