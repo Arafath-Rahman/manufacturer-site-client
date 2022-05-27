@@ -22,7 +22,7 @@ const AddParts = () => {
     const part = {
       name: name,
       description: description,
-      price: price,
+      price: parseInt(price),
       image: image,
       stock: stock,
       moq: moq,

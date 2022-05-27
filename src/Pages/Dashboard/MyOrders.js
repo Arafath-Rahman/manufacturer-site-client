@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useQuery } from "react-query";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import auth from "../../firebase.init";
+import Loading from "../Shared/Loading";
 import DeleteModal from "./DeleteModal";
 
 const MyOrders = () => {
@@ -35,31 +35,11 @@ const MyOrders = () => {
     })
   );
 
-  const handleDelete = (orderId) => {
-    fetch(`http://localhost:5000/order/${orderId}`, {
-      method: "DELETE",
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        if (result.deletedCount) {
-          toast.success(`Order Cancelled successfully`);
-          refetch();
-        }
-      });
-  };
 
-  const handleCancel = (id) => {
-    setDeleteModal(true);
-  };
+  if (loading || isLoading) {
+    return <Loading />;
+  }
 
-  // if (loading || isLoading) {
-  //   return <Loading />;
-  // }
-  //------------------------------
-  //------------------------------
 
   return (
     <div>
@@ -95,14 +75,13 @@ const MyOrders = () => {
                         </Link>
                         <label
                           htmlFor="delete-order-modal"
-                          onClick={() => handleCancel(order._id)}
+                          onClick={() => setDeleteModal(true)}
                           className="btn btn-xs btn-error ml-1"
                         >
                           Cancel
                         </label>
                         {deleteModal && (
                           <DeleteModal
-                            handleDelete={handleDelete}
                             id={order._id}
                             setDeleteModal={setDeleteModal}
                             refetch={refetch}

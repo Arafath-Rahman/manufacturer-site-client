@@ -31,9 +31,10 @@ const Payment = () => {
   //payment with stripe
 
   return (
-    <div className="flex flex-col md:flex-row max-w-2xl gap-5 bg-base-100 rounded-xl shadow-xl p-5">
+    <div className="flex flex-col md:flex-row max-w-2xl gap-5 bg-base-100 rounded-xl shadow-xl p-5 mx-auto pt-12">
       <div>
-        <div className="w-auto">
+        <h2 className="text-2xl font-bold p-4">Payment</h2>
+        <div className="w-auto bg-slate-200 p-4 rounded-xl">
           <h2 className="text-xl font-bold">
             Please pay{" "}
             <span className="text-orange-500">${order.totalPrice}</span> for
@@ -47,7 +48,7 @@ const Payment = () => {
           </p>
         </div>
       </div>
-      <div className="w-full my-auto">
+      <div className="w-full my-auto bg-slate-200 p-4 rounded-xl">
         <Elements stripe={stripePromise}>
           <CheckoutForm order={order} />
         </Elements>

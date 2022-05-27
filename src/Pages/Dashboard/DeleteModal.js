@@ -1,13 +1,27 @@
 import React from "react";
+import { toast } from "react-toastify";
 
-const DeleteModal = ({ handleDelete, id, setDeleteModal, refetch }) => {
+const DeleteModal = ({ id, setDeleteModal, refetch }) => {
+  
+  const handleDelete = (orderId) => {
+    fetch(`http://localhost:5000/order/${orderId}`, {
+      method: "DELETE",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.deletedCount) {
+          toast.success(`Order Cancelled successfully`);
+          refetch();
+        }
+      });
+  };
+
   return (
     <div>
-      <input
-        type="checkbox"
-        id="delete-order-modal"
-        className="modal-toggle"
-      />
+      <input type="checkbox" id="delete-order-modal" className="modal-toggle" />
       <div className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
           <div className="card">
@@ -22,7 +36,6 @@ const DeleteModal = ({ handleDelete, id, setDeleteModal, refetch }) => {
             <label
               onClick={() => {
                 handleDelete(id);
-                refetch();
                 setDeleteModal(false);
               }}
               htmlFor="delete-order-modal"

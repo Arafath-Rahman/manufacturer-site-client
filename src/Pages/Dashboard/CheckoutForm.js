@@ -16,13 +16,16 @@ const CheckoutForm = ({order}) => {
     if (!stripe || !elements) {
       return;
     }
+
     const card = elements.getElement(CardElement);
+
     if (card == null) {
       return;
     }
+
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
-      card,
+      card: card
     });
     setSuccess("");
     setCardError(error?.message || "");
